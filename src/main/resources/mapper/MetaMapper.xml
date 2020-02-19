@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.anpe.website.dao.MetaMapper">
+  <resultMap id="BaseResultMap" type="cn.anpe.website.domain.Meta">
+    <id column="mid" jdbcType="VARCHAR" property="mid" />
+    <result column="meta_name" jdbcType="VARCHAR" property="metaName" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="parent" jdbcType="INTEGER" property="parent" />
+  </resultMap>
+  <select id="selectMidByMetaName" resultType="String">
+    SELECT mid FROM meta WHERE meta_name=#{metaName}
+  </select>
+
+  <select id="selectMetasByAid" resultMap="BaseResultMap">
+    select m.* from meta m
+    LEFT JOIN meta_article ma on m.mid=ma.mid
+    LEFT JOIN article a on a.aid=ma.aid
+    WHERE a.aid=#{aid}
+  </select>
+  <select id="selectMetaIdsByAid" resultType="String">
+     select m.mid from meta m
+    LEFT JOIN meta_article ma on m.mid=ma.mid
+    LEFT JOIN article a on a.aid=ma.aid
+    WHERE a.aid=#{aid}
+  </select>
+</mapper>

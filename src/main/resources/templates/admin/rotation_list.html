@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>轮播图 - anpe后台管理系统</title>
+    <link rel="icon" href="favicon.ico" type="image/ico">
+    <meta name="description" content="xxx公司后台管理系统">
+    <meta name="author" content="yinqi">
+    <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/admin/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="/admin/css/style.min.css" rel="stylesheet">
+    <style>
+        table{
+            table-layout: fixed;
+        }
+        table tbody tr td{
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+<div class="lyear-layout-web">
+    <div class="lyear-layout-container">
+        <aside th:replace="admin/left::left('轮播图')"></aside>
+        <!--头部信息-->
+        <header th:replace="admin/head::head('轮播图')"></header>
+        <!--End 头部信息-->
+        <!--页面主要内容-->
+        <main class="lyear-layout-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-toolbar clearfix">
+                                <form class="pull-right search-bar" method="get" action="#!" role="form">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <input type="hidden" name="search_field" id="search-field" value="title">
+                                            <button class="btn btn-default dropdown-toggle" id="search-btn" type="button" aria-haspopup="true" aria-expanded="false">
+                                                搜索:
+                                            </button>
+                                        </div>
+                                        <input type="text" class="form-control" id="search" name="keyword" placeholder="请输入名称">
+                                    </div>
+                                </form>
+                                <div class="toolbar-btn-action">
+                                    <a class="btn btn-primary m-r-5" id="add"><i class="mdi mdi-plus"></i> 新增</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th width="4%">
+                                                <label class="lyear-checkbox checkbox-primary">
+                                                    <input type="checkbox" id="check-all"><span></span>
+                                                </label>
+                                            </th>
+                                            <th  width="5%">序号</th>
+                                            <th  width="20%">描述</th>
+                                            <th  width="6%">图片</th>
+                                            <th  width="6%">跳转链接</th>
+                                            <th  width="30%">显示状态</th>
+                                            <th  width="6%">排序</th>
+                                            <th  width="6%">创建时间</th>
+                                            <th  width="10%">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <th:block th:each="rotation,userStat: ${rotations}">
+                                        <tr>
+                                            <td>
+                                                <label class="lyear-checkbox checkbox-primary">
+                                                    <input type="checkbox" name="ids[]" th:value="${rotation.rid}"><span></span>
+                                                </label>
+                                            </td>
+                                            <td th:text="${userStat.count}">1</td>
+                                            <td th:text="${rotation.description}">元旦好!</td>
+                                            <td><a th:href="${rotation.imgUrl}">点击查看</a></td>
+                                            <td><a th:href="${rotation.url}">点击查看</a></td>
+                                            <td th:switch="${rotation.isShow}">
+                                                <span th:case="1" class="text-success">显示</span>
+                                                <span th:case="0" class="text-warning">隐藏</span>
+                                            </td>
+                                            <td th:text="${rotation.sort}"></td>
+                                            <td th:text="${rotation.createTime}"></td>
+                                            <td>
+                                                <div style="display: flex;width: 100%;justify-content: space-around">
+                                                    <a class="btn btn-xs btn-default" th:href="${'/article/detail/'+article.aid}" target="_blank" title="查看" data-toggle="tooltip"><i class="mdi mdi-search-web"></i></a>
+                                                    <a th:if="${article.thumbImg!=null}" class="btn btn-xs btn-default" target="_blank" th:href="${article.thumbImg}" title="显示缩略图" data-toggle="tooltip"><i class="mdi mdi-image-filter-drama"></i></a>
+                                                    <a class="btn btn-xs btn-default" th:href="${'/article/showUpdateArticle/'+article.aid}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
+                                                    <a class="btn btn-xs btn-default" href="#!" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </th:block>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <ul class="pagination">
+                                    <li th:class="${active==1?'disabled':''}"><span>«</span></li>
+                                    <th:block th:each="index:${total}">
+                                        <li th:class="${indexStat.count==active?'active':''}"><span th:text="${indexStat.count}">1</span></li>
+                                    </th:block>
+                                    <li th:class="${active==total?'disabled':''}"><a href="#!">»</a></li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+        <!--End 页面主要内容-->
+    </div>
+</div>
+
+<script type="text/javascript" src="/admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="/admin/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/admin/js/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="/admin/js/main.min.js"></script>
+<script type="text/javascript" src="/layer/layer.js"></script>
+
+
+</body>
+<script type="text/javascript">
+    $(function () {
+        $('#search').on('input', (function () {
+            var sstxt = $('#search').val();
+            console.log(sstxt);
+            if (sstxt !== '') {
+                $("table tbody tr").hide().filter(":contains('" + sstxt + "')").show();
+            } else {
+                $("table tbody tr").show();
+            }
+        }))
+    });
+</script>
+
+<script>
+    $("#add").click(function () {
+        layer.open({
+            type: 2,
+            title: '新建轮播图',
+            shadeClose: true,
+            shade: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['1150px', '650px'],
+            content: '/article/rotationAdd'
+        });
+    });
+
+    function layer_show(title,url,w,h){
+        if (title == null || title == '') {
+            title=false;
+        };
+        if (url == null || url == '') {
+            url="404.html";
+        };
+        if (w == null || w == '') {
+            w=800;
+        };
+        if (h == null || h == '') {
+            h=($(window).height() - 50);
+        };
+        layer.open({
+            type: 2,
+            area: [w+'px', h +'px'],
+            fix: false, //不固定
+            maxmin: true,
+            shade:0.4,
+            title: title,
+            content: url
+        });
+    }
+</script>
+</html>

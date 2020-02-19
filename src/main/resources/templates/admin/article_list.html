@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>文章列表 - anpe后台管理系统</title>
+    <link rel="icon" href="favicon.ico" type="image/ico">
+    <meta name="description" content="xxx公司后台管理系统">
+    <meta name="author" content="yinqi">
+    <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/admin/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="/admin/css/style.min.css" rel="stylesheet">
+    <style>
+        table{
+            table-layout: fixed;
+        }
+        table tbody tr td{
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+<div class="lyear-layout-web">
+    <div class="lyear-layout-container">
+        <aside th:replace="admin/left::left('文章列表')"></aside>
+        <!--头部信息-->
+        <header th:replace="admin/head::head('文章列表')"></header>
+        <!--End 头部信息-->
+        <!--页面主要内容-->
+        <main class="lyear-layout-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-toolbar clearfix">
+                                <form class="pull-right search-bar" method="get" action="#!" role="form">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <input type="hidden" name="search_field" id="search-field" value="title">
+                                            <button class="btn btn-default dropdown-toggle" id="search-btn" type="button" aria-haspopup="true" aria-expanded="false">
+                                                搜索:
+                                            </button>
+                                        </div>
+                                        <input type="text" class="form-control" id="search" name="keyword" placeholder="请输入名称">
+                                    </div>
+                                </form>
+                                <div class="toolbar-btn-action">
+                                    <a class="btn btn-primary m-r-5" href="#!"><i class="mdi mdi-plus"></i> 新增</a>
+                                    <a class="btn btn-success m-r-5" href="#!"><i class="mdi mdi-check"></i> 启用</a>
+                                    <a class="btn btn-warning m-r-5" href="#!"><i class="mdi mdi-block-helper"></i> 禁用</a>
+                                    <a class="btn btn-danger" href="#!"><i class="mdi mdi-window-close"></i> 删除</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th width="4%">
+                                                <label class="lyear-checkbox checkbox-primary">
+                                                    <input type="checkbox" id="check-all"><span></span>
+                                                </label>
+                                            </th>
+                                            <th  width="5%">编号</th>
+                                            <th  width="20%">文章标题</th>
+                                            <th  width="6%">作者</th>
+                                            <th  width="30%">副标题</th>
+                                            <th  width="6%">阅读量</th>
+                                            <th  width="6%">排序</th>
+                                            <th  width="6%">状态</th>
+                                            <th  width="10%">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <th:block th:each="article,userStat: ${articles}">
+                                        <tr>
+                                            <td>
+                                                <label class="lyear-checkbox checkbox-primary">
+                                                    <input type="checkbox" name="ids[]" th:value="${article.aid}"><span></span>
+                                                </label>
+                                            </td>
+                                            <td th:text="${userStat.count}">1</td>
+                                            <td th:text="${article.title}">元旦好!</td>
+                                            <td th:text="${article.authorId}">张三</td>
+                                            <td th:text="${article.subtitle}">新的一年,xxxxx</td>
+                                            <td th:text="${article.hits}">89999</td>
+                                            <td th:text="${article.orderBy}">10</td>
+                                            <td th:switch="${article.status}">
+                                                <span th:case="0" class="text-info">待审核</span>
+                                                <span th:case="1" class="text-success">正常</span>
+                                                <span th:case="2" class="text-warning">未通过</span>
+                                                <span th:case="3" class="text-danger">禁用</span>
+
+                                            </td>
+                                            <td>
+                                                <div style="display: flex;width: 100%;justify-content: space-around">
+                                                    <a class="btn btn-xs btn-default" th:href="${'/article/detail/'+article.aid}" target="_blank" title="查看" data-toggle="tooltip"><i class="mdi mdi-search-web"></i></a>
+                                                    <a th:if="${article.thumbImg!=null}" class="btn btn-xs btn-default" target="_blank" th:href="${article.thumbImg}" title="显示缩略图" data-toggle="tooltip"><i class="mdi mdi-image-filter-drama"></i></a>
+                                                    <a class="btn btn-xs btn-default" th:href="${'/article/showUpdateArticle/'+article.aid}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
+                                                    <a class="btn btn-xs btn-default" href="#!" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </th:block>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <ul class="pagination">
+                                    <li th:class="${active==1?'disabled':''}"><span>«</span></li>
+                                    <th:block th:each="index:${total}">
+                                        <li th:class="${index==active?'active':''}"><span th:text="${index}">1</span></li>
+                                    </th:block>
+                                    <li th:class="${active==total?'disabled':''}"><a href="#!">»</a></li>
+                                    <!--<li class="active"><span>1</span></li>-->
+                                    <!--<li><a href="#1">2</a></li>-->
+                                    <!--<li class="disabled"><span>...</span></li>-->
+                                    <!--<li><a href="#!">8</a></li>-->
+                                    <!--<li><a href="#!">9</a></li>-->
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+        <!--End 页面主要内容-->
+    </div>
+</div>
+
+<script type="text/javascript" src="/admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="/admin/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/admin/js/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="/admin/js/main.min.js"></script>
+
+</body>
+<script type="text/javascript">
+    $(function () {
+        $('#search').on('input', (function () {
+            var sstxt = $('#search').val();
+            console.log(sstxt);
+            if (sstxt !== '') {
+                $("table tbody tr").hide().filter(":contains('" + sstxt + "')").show();
+            } else {
+                $("table tbody tr").show();
+            }
+        }))
+    });
+</script>
+
+
+</html>

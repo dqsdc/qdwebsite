@@ -1,0 +1,40 @@
+spring:
+    thymeleaf:
+        prefix: classpath:/templates/
+        suffix: .html
+        mode: LEGACYHTML5
+        encoding: UTF-8
+        cache: false
+    profiles: dev
+    datasource:
+        type: com.alibaba.druid.pool.DruidDataSource
+        master:
+           name: test
+           url: jdbc:mysql://localhost:3306/anpe?serverTimezone=GMT%2B8
+           username: root
+           password: 123
+           driver-class-name: com.mysql.cj.jdbc.Driver
+           filters: stat n
+           maxActive: 100
+           initialSize: 20
+           maxWait: 6000
+           minIdle: 10
+           timeBetweenEvictionRunsMillis: 60000
+           minEvictableIdleTimeMillis: 300000
+           validationQuery: select 'x' FROM DUAL
+           testWhileIdle: true
+           testOnBorrow: false
+           testOnReturn: false
+           poolPreparedStatements: true
+           maxOpenPreparedStatements: 20
+
+mapper:
+    mappers: tk.mybatis.mapper.common.Mapper
+    identity: select sys_guid() from dual
+
+server:
+  port: 8080
+  session-timeout: 30
+  ##tomcat.max-threads: 0
+  tomcat.uri-encoding: UTF-8
+

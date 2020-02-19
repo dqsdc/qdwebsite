@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.anpe.website.dao.MetaArticleMapper">
+  <resultMap id="BaseResultMap" type="cn.anpe.website.domain.MetaArticle">
+    <id column="meta_article_id" jdbcType="VARCHAR" property="metaArticleId" />
+    <result column="mid" jdbcType="VARCHAR" property="mid" />
+    <result column="aid" jdbcType="VARCHAR" property="aid" />
+  </resultMap>
+  <select id="selectByAid" resultMap="BaseResultMap">
+    SELECT * FROM  meta_article WHERE aid=#{aid}
+  </select>
+</mapper>

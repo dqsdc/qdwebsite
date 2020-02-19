@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.anpe.website.dao.RotationMapper">
+  <resultMap id="BaseResultMap" type="cn.anpe.website.domain.Rotation">
+    <id column="rid" jdbcType="VARCHAR" property="rid" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="is_show" jdbcType="INTEGER" property="isShow" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+
+  <select id="selectRotationListByPageAndNum" resultMap="BaseResultMap">
+    SELECT * FROM `rotation` ORDER BY create_time DESC limit #{from},#{num}
+  </select>
+
+  <select id="countTotalNum" resultType="Integer">
+    SELECT count(*) FROM  `rotation`
+  </select>
+</mapper>

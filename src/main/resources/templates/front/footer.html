@@ -1,0 +1,416 @@
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="footer">
+<div class="footer">
+    <div class="content">
+        <div class="pic">
+            <img src="/front/images/f1.png" alt="">
+        </div>
+        <div class="add">
+            <img src="/front/images/f2.png" alt="">
+        </div>
+        <div class="address">
+            <p>总 部：南京市江宁区天元中路126号新城发展中心1号楼6楼</p>
+            <p>邮 编：211112</p>
+            <p>总 机：+86（25）84459303 84459429 84459479</p>
+            <p>传 真：+86（25）84519256</p>
+            <p>邮 箱：master@anpe.cn</p>
+            <p>技术支持热线：800-828-9961</p>
+            <p>生产基地：中国 • 南京六合经济开发区优倍工业园</p>
+            <p>在建新区：南京江宁经济技术开发区金鑫路优倍智造园</p>
+            <div class="link">
+                <a href="javascript:;" class="cloud">
+                    <img src="/front/images/fi1.png" alt="">
+                </a>
+                <a href="mailto:master@anpe.cn">
+                    <img src="/front/images/fi2.png" alt="">
+                </a>
+                <a href="http://www.anpe.cn/index.php/contact/ding.html" target="_blank">
+                    <img src="/front/images/fi3.png" alt="">
+                </a>
+            </div>
+        </div>
+        <div class="ewm">
+            <div class="top">
+                <div class="pic">
+                    <p>微信公众号</p>
+                    <img src="/front/images/ewm2.jpg" alt="">
+                </div>
+                <div class="pic">
+                    <p>手机官网</p>
+                    <img src="/front/images/ewm.jpg" alt="">
+                </div>
+            </div>
+            <div class="icon">
+                <div class="link bdsharebuttonbox">
+                    <a href="http://www.anpe.cn/index.php/welcome.html#br" class="kan" title="电子期刊"></a>
+                    <a href="https://weibo.com/6283024204/profile?topnav=1&wvr=6&is_all=1" class="bds_tsina"
+                       data-cmd="tsina"></a>
+                    <!-- <a href="" class="youku"></a> -->
+                    <a href="http://v.qq.com/vplus/4502645351eb8a4d28a7e9b8c5823141" class="ten" target="_blank"></a>
+                </div>
+                <div class="more-link">
+                    <div class="top">== 友情链接 == <i><img src="/front/images/xia.png" alt=""></i></div>
+                    <div class="linkyou">
+                        <a href="http://www.newpwr.com.cn/">南京优倍自动化系统有限公司</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="last">
+        南京优倍电气有限公司 @ China All Rights Reserved <a target="_blank" style="display:inline;color: #435368;"
+                                                  href="http://www.beian.miit.gov.cn"> 苏ICP备14051850号</a>
+    </div>
+</div>
+<!-- 加入对比 -->
+<div class="j-dui">
+    <div class="w1200">
+        <div class="j-box j-data1" id-data=""></div>
+        <div class="j-box j-data2" id-data=""></div>
+        <div class="j-box j-data3" id-data=""></div>
+        <div class="link">
+            <a href="http://www.anpe.cn/index.php/select/contrast.html" onclick="return jumpCompare(); return false;">去对比</a>
+            <a href="javascript:;" class="dui-clear">清空对比栏</a>
+        </div>
+        <script type="text/javascript">
+            function jumpCompare() {
+                let id_first = $('.j-data1').attr('id-data');
+                let id_sec = $('.j-data2').attr('id-data');
+                let id_three = $('.j-data3').attr('id-data');
+                let data = {id_first: id_first, id_sec: id_sec, id_three: id_three};
+
+                let url = 'http://www.anpe.cn/index.php/select/contrast.html?id_f=' + id_first + '&id_sec=' + id_sec + '&id_three=' + id_three;
+                location.href = url;
+                return false;
+            }
+
+            $('.j-box').on('click', '.cha', function () {
+                // console.log($(this).attr('id-data'));
+                let id = $(this).attr('id-data');
+                let data = {id: id};
+                let url = 'http://www.anpe.cn/index.php/api/unsetSession.html';
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        data: data,
+                        time: '1577775695',
+                        token: '2a28eccb18c4ee1ec55d503127c817ef',
+                        'ci_csrf_token': ''
+                    }
+                })
+                // 完成之后
+                    .done(function (data) {
+                        if (data.sta == 1) {
+                            location.reload();
+                        }
+                        else {
+                            alert(data.msg);
+                        }
+
+                        console.log(data);
+
+                    })
+            });
+            $('.cha').click(function () {
+                console.log($(this).attr('id-data'));
+                let id = $(this).attr('id-data');
+                let id_first = '';
+                let id_sec = '';
+                let id_three = '';
+                if (id == id_first) {
+                    id_first = '';
+                } else if (id == id_sec) {
+                    id_sec = '';
+                } else if (id == id_three) {
+                    id_three = '';
+                }
+                let data = {id: id};
+                let url = 'http://www.anpe.cn/index.php/api/unsetSession.html';
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        data: data,
+                        time: '1577775695',
+                        token: '2a28eccb18c4ee1ec55d503127c817ef',
+                        'ci_csrf_token': ''
+                    }
+                })
+                // 完成之后
+                    .done(function (data) {
+                        if (data.sta == 1) {
+                            let url = 'http://www.anpe.cn/index.php/select/contrast.html?id_f=' + id_first + '&id_sec=' + id_sec + '&id_three=' + id_three;
+                            location.href = url;
+                        }
+                        else {
+                            alert(data.msg);
+                        }
+
+                        console.log(data);
+
+                    })
+            });
+        </script>
+    </div>
+</div>
+<script>
+    $(function () {
+
+
+        $('.cloud').click(function () {
+            alert('还在成长中，敬请期待哦！')
+        })
+
+        var nei = $('.j-data1').text();
+        var nei2 = $('.j-data2').text();
+        var nei3 = $('.j-data3').text();
+        // console.log(nei)
+        if (!nei == "" || !nei2 == "" || !nei3 == "") {
+            $('.j-dui').show();
+        }
+
+
+        $('.dui-clear').click(function () {
+            $('.j-data1').html('');
+            $('.j-data2').html('');
+            $('.j-data3').html('');
+            let data = {id: 1};
+            let url = 'http://www.anpe.cn/index.php/api/unsetSession.html';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                dataType: 'json',
+                data: {data: data, time: '1577775695', token: '2a28eccb18c4ee1ec55d503127c817ef', 'ci_csrf_token': ''}
+            })
+            // 完成之后
+                .done(function (data) {
+                    console.log(data);
+                    if (data.sta == 1) {
+                        $('.j-data1').html('');
+                        $('.j-data2').html('');
+                        $('.j-data3').html('');
+                    }
+
+                })
+            $('.j-dui').fadeOut();
+        })
+
+        var str = window.location.href;
+        $(".head-er ul").children("li").each(function () {
+            if (str.indexOf($(this).attr("cur")) > 0) {
+                $(".head-er ul").children("li").removeClass("act");
+                $(this).addClass("act");
+            }
+        });
+        // public
+        $('.head-nav li').hover(function () {
+            $(this).find('.list').stop().slideToggle();
+        })
+        var scrollAction, originalDir;
+        window.onscroll = function (e) {
+            var direction = scrollFunc();
+            if (direction && originalDir != direction) {
+                if (direction == 'down') {
+                    // $('.head-er').stop(true).fadeOut();
+                    $('.head').addClass('act');
+
+                    $('.fix .head').hover(function () {
+                        // $(".head-er").stop().fadeIn();
+
+                    })
+                    $('.fix').mouseleave(function () {
+                        // $(".head-er").stop().fadeOut();
+
+                    })
+                }
+                originalDir = direction;
+            }
+        }
+
+        //判断页面滚动方向
+        function scrollFunc() {
+            var scrollDirection;
+            if (!scrollAction) {
+                scrollAction = window.pageYOffset;
+            }
+            var diff = scrollAction - window.pageYOffset;
+            if (diff < 0) {
+                // Scroll down
+                scrollDirection = 'down';
+            } else if (diff > 0) {
+                // Scroll up
+                scrollDirection = 'up';
+            } else {
+                // First scroll event
+            }
+            scrollAction = window.pageYOffset;
+            return scrollDirection;
+        }
+
+        function BottomJumpPage() {
+            var scrollTop = $(this).scrollTop();
+            var scrollHeight = $(document).height();
+            var windowHeight = $(this).height();
+            if (scrollTop + windowHeight == scrollHeight) { //滚动到底部执行事件
+                // console.log("我到底部了")
+
+            }
+            if (scrollTop == 0) { //滚动到头部部执行事件
+                $('.head').removeClass('act');
+
+                $('.head-er').stop(true).fadeIn(400);
+                $('.fix .head').hover(function () {
+                    // $(".head-er").stop().show();
+                    //
+                })
+                $('.fix').mouseleave(function () {
+                    // $(".head-er").stop().show();
+                    //
+                })
+
+            }
+        }
+
+        $(window).scroll(BottomJumpPage);
+        $('.more-link').hover(function () {
+            $('.linkyou').stop().slideToggle();
+            $(this).toggleClass('act');
+        })
+    })
+
+</script>
+<script>
+    $(".menu_div").click(function () {
+        $(this).toggleClass("active_div");
+        $(this).next("ul").slideToggle();
+
+    });
+    $(".m_ul").find("li").click(function () {
+        var aaa = $(this).children("p").css("display");
+        if (aaa == "none") {
+            $(".m_ul").find("p").slideUp();
+            $(".m_ul").find("i").removeClass("active_i");
+            $(this).addClass("active_li").siblings().removeClass("active_li");
+            $(this).children("p").slideDown();
+            $(this).find("i").addClass("active_i");
+        } else {
+            $(this).removeClass("active_li");
+            $(this).children("p").slideUp();
+            $(this).find("i").removeClass("active_i");
+        }
+    });
+    $('.sel-pro').on('click', '.jixu', function () {
+        let cid = 169;
+        let number = 1;
+        let pro_id = $(this).attr('id-data');
+        let title = $(this).attr('t-data');
+        let user_id = '';
+        if (user_id == '') {
+            alert('请登录');
+            location.href = 'http://www.anpe.cn/index.php/login/login.html';
+            return false;
+        }
+        let data = {pro_id: pro_id, title: title, user_id: user_id, cid: cid, number: number};
+        $.ajax({
+            url: 'http://www.anpe.cn/index.php/api/insertP.html',
+            type: 'POST',
+            dataType: 'json',
+            data: {data: data, time: '1577775695', token: '2a28eccb18c4ee1ec55d503127c817ef', 'ci_csrf_token': ''}
+        })
+        // 完成之后
+            .done(function (data) {
+                console.log(data);
+                if (data.sta == 1) {
+                    alert('加入成功');
+                    location.reload();
+                } else {
+                    alert('加入失败');
+                }
+
+            })
+
+
+        return false;
+    });
+    $('.jixu').click(function () {
+        let cid = 169;
+        let number = 1;
+        let pro_id = $(this).attr('id-data');
+        let title = $(this).attr('t-data');
+        let user_id = '';
+        if (user_id == '') {
+            alert('请登录');
+            location.href = 'http://www.anpe.cn/index.php/login/login.html';
+            return false;
+        }
+        let data = {pro_id: pro_id, title: title, user_id: user_id, cid: cid, number: number};
+        $.ajax({
+            url: 'http://www.anpe.cn/index.php/api/insertP.html',
+            type: 'POST',
+            dataType: 'json',
+            data: {data: data, time: '1577775695', token: '2a28eccb18c4ee1ec55d503127c817ef', 'ci_csrf_token': ''}
+        })
+        // 完成之后
+            .done(function (data) {
+                console.log(data);
+                if (data.sta == 1) {
+                    alert('加入成功');
+                    location.reload();
+                } else {
+                    alert('加入失败');
+                }
+
+            })
+
+
+        return false;
+    });
+
+    function delPro(obj) {
+        let pro_id = $(obj).attr('id-data');
+        let data = {id: pro_id};
+
+        $.ajax({
+            url: 'http://www.anpe.cn/index.php/api/delPro.html',
+            type: 'POST',
+            dataType: 'json',
+            data: {data: data, time: '1577775695', token: '2a28eccb18c4ee1ec55d503127c817ef', 'ci_csrf_token': ''}
+        })
+        // 完成之后
+            .done(function (data) {
+
+                if (data.sta == 1) {
+                    alert('删除成功');
+                    location.reload();
+                } else {
+                    alert('删除失败');
+                }
+
+            })
+
+    }
+</script>
+<script type="text/javascript">
+    addLoadEvent(changeClass);
+
+    function changeClass() {
+        $('.prev').removeClass('prev').addClass('pal');
+        $('.next').removeClass('next').addClass('par');
+    }
+
+    //页面预加载函数
+    function addLoadEvent(func) {
+        var oldonload = window.onload;
+        if (typeof window.onload != 'function') {
+            window.onload = func;
+        } else {
+            window.onload = function () {
+                oldonload();
+                func();
+            }
+        }
+    }
+</script>
+</html>

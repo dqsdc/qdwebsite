@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:replace="front/header::head"></header>
+<body>
+<div class="ban" aos="fade-zoom-in">
+</div>
+
+<div class="nav">
+    <div class="w1200 clear" aos="fade-left">
+        <ul class="right" th:each="meta,stat:${metas}">
+           <li style="margin-left: 10px;margin-right: 10px"><a href="" th:text="${meta.metaName}">新闻</a></li>
+        </ul>
+    </div>
+</div>
+<div class="info_box w1200" aos="fade-up">
+    <div class="title_div">
+        <h3 th:text="${article.title}">中石化框架招标：优倍浪涌保护器荣获第一，安全栅再度入围</h3>
+        <strong>发布时间：<span th:text="${DateKit.formatDateByUnixTime(article.createTime,'yyyy-MM-dd')}"></span></strong>
+        <span> 阅读量：<strong th:text="${article.hits}">106</strong></span>
+        <em class="bdsharebuttonbox">
+            <a href="#" class="bds_more" data-cmd="more">分享</a>
+        </em>
+    </div>
+    <div class="content_div" th:utext="${article.content}">
+    </div>
+    <div class="page_div" aos="fade-zoom-in">
+        <a href="javascript:history.go(-1);" class="return_a">返回</a>
+    </div>
+</div>
+<div class="xb-video">
+    <div class="center">
+        <i onclick="cli()">+</i>
+        <iframe width="660" height="400" src="" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+    </div>
+</div>
+<footer th:replace="front/footer::footer"></footer>
+</body>
+
+</html>

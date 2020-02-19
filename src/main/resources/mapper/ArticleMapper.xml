@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.anpe.website.dao.ArticleMapper">
+  <resultMap id="BaseResultMap" type="cn.anpe.website.domain.Article">
+    <id column="aid" jdbcType="VARCHAR" property="aid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="modified_time" jdbcType="BIGINT" property="modifiedTime" />
+    <result column="author_id" jdbcType="VARCHAR" property="authorId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="thumb_img" jdbcType="VARCHAR" property="thumbImg" />
+    <result column="hits" jdbcType="INTEGER" property="hits" />
+    <result column="comment_num" jdbcType="INTEGER" property="commentNum" />
+    <result column="error" jdbcType="VARCHAR" property="error" />
+    <result column="order_by" jdbcType="INTEGER" property="orderBy" />
+    <result column="subtitle" jdbcType="VARCHAR" property="subtitle" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.anpe.website.domain.Article">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+
+  <select id="selectArticleListByPageAndNum" resultMap="BaseResultMap">
+    SELECT * FROM `article` ORDER BY create_time DESC limit #{from},#{num}
+  </select>
+
+  <select id="countTotalNum" resultType="Integer">
+    SELECT count(*) FROM  `article`
+  </select>
+</mapper>
