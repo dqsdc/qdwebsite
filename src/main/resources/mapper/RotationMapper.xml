@@ -20,4 +20,7 @@
   <select id="countTotalNum" resultType="Integer">
     SELECT count(*) FROM  `rotation`
   </select>
+  <select id="selectRotationShowList" resultMap="BaseResultMap">
+        select * from rotation WHERE is_show=1 ORDER BY sort
+  </select>
 </mapper>

@@ -31,4 +31,10 @@ public interface RotationService {
      * @return
      */
     boolean addRotation(Rotation rotation);
+
+    /**
+     * 按升序顺序获取所有需要展示的轮播图列表数据
+     * @return 轮播图列表数据
+     */
+    List<Rotation> selectRotationShowList();
 }

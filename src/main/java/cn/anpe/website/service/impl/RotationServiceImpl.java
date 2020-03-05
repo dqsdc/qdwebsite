@@ -35,4 +35,9 @@ public class RotationServiceImpl implements RotationService {
     public boolean addRotation(Rotation rotation) {
         return rotationMapper.insert(rotation) > 0;
     }
+
+    @Override
+    public List<Rotation> selectRotationShowList() {
+        return rotationMapper.selectRotationShowList();
+    }
 }

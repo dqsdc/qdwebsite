@@ -19,4 +19,10 @@ public interface RotationMapper extends Mapper<Rotation> {
     List<Rotation> selectRotationListByPageAndNum(@Param("from") Integer from, @Param("num") Integer num);
 
     Integer countTotalNum();
+
+    /**
+     * 按顺序获取所有需要展示的轮播图数据
+     * @return
+     */
+    List<Rotation> selectRotationShowList();
 }
