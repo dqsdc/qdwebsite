@@ -17,46 +17,39 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <form action="#!" method="post" class="row">
-                            <div class="form-group col-md-12">
-                                <label>描述</label>
-                                <input type="text" class="form-control" id="description" name="description" value=""
-                                       placeholder="请输入轮播图描述"/>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label>上传缩略图</label>
-                                <input type="hidden" id="thumb_path" value="">
-                                <input type="file" id="thumb" name="thumb">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label>链接地址</label>
-                                <input type="text" class="form-control" id="url" name="url"
-                                       value="" placeholder="请输入链接地址"/>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="sort">排序</label>
-                                <input type="text" class="form-control" id="sort" name="sort" value="0"/>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label>状态</label>
-                                <div class="clearfix">
-                                    <label class="lyear-radio radio-inline radio-primary">
-                                        <input type="radio" name="status" value="1" checked><span>展示</span>
-                                    </label>
-                                    <label class="lyear-radio radio-inline radio-primary">
-                                        <input type="radio" name="status" value="0"><span>隐藏</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <button type="submit" class="btn btn-primary ajax-post">提交
-                                </button>
-                            </div>
-                        </form>
-
+                <div class="form-group col-md-12">
+                    <label>描述</label>
+                    <input type="text" class="form-control" id="description" name="description" value=""
+                           placeholder="请输入轮播图描述"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>上传缩略图</label>
+                    <input type="hidden" id="thumb_path">
+                    <input type="file" id="thumb" name="thumb">
+                </div>
+                <div class="form-group col-md-12">
+                    <label>链接地址</label>
+                    <input type="text" class="form-control" id="url" name="url"
+                           value="" placeholder="请输入链接地址,请以Http://或Https://开头"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="sort">排序</label>
+                    <input type="text" class="form-control" id="sort" name="sort" value="0"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>状态</label>
+                    <div class="clearfix">
+                        <label class="lyear-radio radio-inline radio-primary">
+                            <input type="radio" name="status" value="1" checked><span>展示</span>
+                        </label>
+                        <label class="lyear-radio radio-inline radio-primary">
+                            <input type="radio" name="status" value="0"><span>隐藏</span>
+                        </label>
                     </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <button id="submit" class="btn btn-primary ajax-post">提交
+                    </button>
                 </div>
             </div>
         </div>
@@ -65,9 +58,72 @@
 
 <script type="text/javascript" src="/admin/js/jquery.min.js"></script>
 <script type="text/javascript" src="/admin/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/admin/js/perfect-scrollbar.min.js"></script>
-<!--标签插件-->
-<script src="/admin/js/jquery-tags-input/jquery.tagsinput.min.js"></script>
-<script type="text/javascript" src="/admin/js/main.min.js"></script>
 </body>
+<script>
+    $("#submit").click(function () {
+        console.log(parent.$('.btn-refresh'));
+        const description = $("#description").val();
+        const img = $("#thumb_path").val();
+        if (img === null || img === undefined || img === '') {
+            alert("请上传轮播图")
+            return;
+        }
+        const url = $("#url").val();
+        if (url != null || url !== '') {
+            let match = url.match("(http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&:/~\\+#]*[\\w\\-\\@?^=%&/~\\+#])?");
+            if (!match) {
+                alert("请上传正确的网址");
+                return;
+            }
+        }
+        const sort = $("#sort").val();
+        const status = $("input[type='radio']:checked").val();
+        $.ajax({
+            url: '/article/addRotation',
+            method: 'post',
+            data: {
+                "description": description,
+                "imgUrl": img,
+                "url": url,
+                "sort": sort,
+                "isShow": status
+            },
+            success: function (data) {
+                console.log("success");
+                if (data.code === 200) {
+                    console.log("ok");
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                }
+            },
+            error: function (response) {
+                console.log("error " + response);
+            }
+        });
+    });
+
+    $("#thumb").change(function () {
+        const thumb_file = $('#thumb')[0].files[0];
+        console.log('thumb ' + thumb_file);
+        let formData = new FormData();
+        formData.append("thumb", thumb_file);
+        $.ajax({
+            url: '/common/uploadImg',
+            dataType: 'json',
+            type: 'POST',
+            async: true,
+            data: formData,
+            processData: false, // 使数据不做处理
+            contentType: false, // 不要设置Content-Type请求头
+            success: function (data) {
+                console.log(data);
+                console.log(data.data);
+                $("#thumb_path").val(data.data);
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    });
+</script>
 </html>

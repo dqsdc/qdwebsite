@@ -31,4 +31,8 @@ public class RotationServiceImpl implements RotationService {
     public Integer countTotalNum() {
         return rotationMapper.countTotalNum();
     }
+    @Override
+    public boolean addRotation(Rotation rotation) {
+        return rotationMapper.insert(rotation) > 0;
+    }
 }

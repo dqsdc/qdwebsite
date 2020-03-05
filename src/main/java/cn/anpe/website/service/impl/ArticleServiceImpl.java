@@ -73,7 +73,7 @@ public class ArticleServiceImpl implements ArticleService {
                 metaArticle.setMetaArticleId(UUID.UU32());
                 metaArticle.setAid(aid);
                 metaArticle.setMid(s);
-                System.out.println("insert ------"+metaArticle);
+                System.out.println("insert ------" + metaArticle);
                 metaArticleMapper.insert(metaArticle);
             }
         }
@@ -87,7 +87,7 @@ public class ArticleServiceImpl implements ArticleService {
             }
             if (flag) {
                 //证明此时ma是老值
-                System.out.println("delete  +"+ma);
+                System.out.println("delete  +" + ma);
                 metaArticleMapper.deleteByPrimaryKey(ma);
             }
         }

@@ -24,4 +24,11 @@ public interface RotationService {
      * @return 文章总数
      */
     Integer countTotalNum();
+
+    /**
+     * 添加一条轮播图记录
+     * @param rotation
+     * @return
+     */
+    boolean addRotation(Rotation rotation);
 }

@@ -906,7 +906,7 @@ img {
   display: inline-block;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url('../images/more_1.png');
+  background-image: url('../images/more.png');
   vertical-align: middle;
   margin-left: 5px;
   margin-top: -4px;
@@ -914,7 +914,7 @@ img {
 }
 
 .info-t a:hover i {
-  background-image: url('../images/mo_1.png');
+  background-image: url('../images/mo.png');
 }
 
 .wel-new .left {

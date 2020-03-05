@@ -95,4 +95,19 @@ public class Rotation {
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Rotation{" +
+                "rid='" + rid + '\'' +
+                ", description='" + description + '\'' +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", url='" + url + '\'' +
+                ", sort=" + sort +
+                ", isShow=" + isShow +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", remark='" + remark + '\'' +
+                '}';
+    }
 }

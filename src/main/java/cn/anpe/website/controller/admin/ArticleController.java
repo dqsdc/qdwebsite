@@ -10,6 +10,8 @@ import cn.anpe.website.service.ArticleService;
 import cn.anpe.website.service.RotationService;
 import cn.anpe.website.util.DateKit;
 import cn.anpe.website.util.UUID;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,7 @@ import java.util.List;
  * @Date: 2020-01-07 14:39
  * @Description:
  */
+@Api("文章管理相关接口")
 @Controller
 @RequestMapping("article")
 public class ArticleController {
@@ -137,6 +140,7 @@ public class ArticleController {
         model.addObject("rotations", rotations);
         model.addObject("total", Math.ceil(total / 10.0));
         model.addObject("active", 1);
+        model.addObject("DateKit",new DateKit());
         model.setViewName("admin/rotation_list");
         return model;
     }
@@ -149,12 +153,26 @@ public class ArticleController {
         model.addObject("rotations", rotations);
         model.addObject("total", Math.ceil(total / 10.0));
         model.addObject("active", page);
+        model.addObject("DateKit",new DateKit());
         model.setViewName("admin/rotation_list");
         return model;
     }
 
-    @RequestMapping("rotationAdd")
-    public String getRotationAdd() {
+    @RequestMapping("showRotationAdd")
+    public  String getRotationAdd() {
         return "admin/rotation_add";
+    }
+
+    @ApiOperation("添加新的轮播图")
+    @RequestMapping("addRotation")
+    @ResponseBody
+    public ResultVo addRotation(Rotation rotation) {
+        ResultVo resultVo = new ResultVo();
+        rotation.setRid(UUID.UU32());
+        rotation.setCreateTime((long) DateKit.getCurrentUnixTime());
+        System.out.println("rotation:  "+rotation);
+        rotationService.addRotation(rotation);
+        resultVo.setCode(ResultVo.SUCCESS);
+        return resultVo;
     }
 }

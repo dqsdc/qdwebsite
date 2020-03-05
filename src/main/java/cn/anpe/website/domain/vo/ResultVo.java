@@ -6,7 +6,7 @@ package cn.anpe.website.domain.vo;
  * @Description:
  */
 public class ResultVo {
-    public final static Integer IDENTFIY_CODE_WRONG = 404;
+    public final static Integer MISSING = 404;
     public final static Integer SUCCESS = 200;
     private Integer code;
     private String data;

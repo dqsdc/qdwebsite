@@ -1,0 +1,729 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="content-language" content="zh-CN"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="keywords" content="南京优倍电气有限公司"/>
+    <meta name="description" content="南京优倍电气有限公司"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <title>南京优倍电气有限公司</title>
+    <link href="http://www.anpe.cn/favicon-2019.ico" rel="shortcut icon">
+    <!-- PC站 -->
+    <link rel="stylesheet" href="/front/css/style.css" type="text/css" media="screen" charset="utf-8">
+    <script src="/front/js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="/front/css/swiper.min.css" type="text/css" media="screen" charset="utf-8">
+    <script src="/front/js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<div class="fix">
+    <div class="head">
+        <div class="content clear">
+            <a href="http://www.anpe.cn/index.php/welcome.html" class="left"><img src="/front/images/logo.png" alt=""
+                                                                                  class="logo"></a>
+            <div class="pic left"><img src="/front/images/l2.png" alt=""></div>
+            <div class="right">
+                <!-- <div class="huan">
+                    <a href="">中文</a>
+                    <a href="">English</a>
+                </div> -->
+                <div class="dz">
+                    <a href="http://www.anpe.cn/index.php/login/login.html">登录</a>
+                    <a href="http://www.anpe.cn/index.php/login/register.html">注册</a>
+                </div>
+                <a href="http://www.anpe.cn/index.php/select/inquiry.html" class="wode">我的选型 <i>0</i></a>
+            </div>
+
+        </div>
+    </div>
+    <div class="head-er">
+        <div class="content clear">
+            <ul class="head-nav left">
+                <li cur="welcome">
+                    <a href="http://www.anpe.cn/index.php/welcome.html">首页</a>
+                </li>
+                <li cur="about">
+                    <a href="http://www.anpe.cn/index.php/about/profile.html">公司 <i></i></a>
+                    <div class="list">
+                        <div class="font">
+                            <div class="ti">公司</div>
+                            <div class="clear">
+                                <a href="http://www.anpe.cn/index.php/about/profile.html">公司简介</a>
+                                <a href="http://www.anpe.cn/index.php/about/idea.html">企业理念</a>
+                                <a href="http://www.anpe.cn/index.php/about/leader.html">企业领军</a>
+                                <a href="http://www.anpe.cn/index.php/about/honour.html">资质荣誉</a>
+                                <a href="http://www.anpe.cn/index.php/about/produce.html">智能制造</a>
+                                <a href="http://www.anpe.cn/index.php/about/mix.html">两化融合</a>
+                                <a href="http://www.anpe.cn/index.php/about/tech.html">技术研发</a>
+                                <a href="http://www.anpe.cn/index.php/video/more.html">视频中心</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li cur="news">
+                    <a href="http://www.anpe.cn/index.php/news/cid/50.html">新闻 <i></i></a>
+                    <div class="list">
+                        <div class="font">
+                            <div class="ti">新闻</div>
+                            <div class="clear">
+                                <a href="http://www.anpe.cn/index.php/news/cid/50.html">新闻</a>
+                                <a href="http://www.anpe.cn/index.php/news/cid/51.html">展会</a>
+                                <a href="http://www.anpe.cn/index.php/news/cid/52.html">媒体关注</a>
+                                <a href="http://www.anpe.cn/index.php/news/cid/53.html">管理内刊</a>
+                                <a href="http://www.anpe.cn/index.php/news/cid/54.html">产品故事</a>
+                                <a href="http://www.anpe.cn/index.php/news/cid/55.html">电子智造</a>
+                                <a href="http://www.anpe.cn/index.php/news/cid/56.html">行业快讯</a>
+                                <a href="http://www.anpe.cn/index.php/news/cid/57.html">知识分享</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li cur="product">
+                    <a href="http://www.anpe.cn/index.php/product/product.html">产品 <i></i></a>
+                    <div class="list">
+                        <div class="font">
+                            <div class="ti">产品</div>
+                            <div class="clear">
+                                <a href="http://www.anpe.cn/index.php/product/product/660.html">隔离式安全栅</a>
+                                <a href="http://www.anpe.cn/index.php/product/product/661.html">隔离器</a>
+                                <a href="http://www.anpe.cn/index.php/product/product/811.html">温度变送器</a>
+                                <a href="http://www.anpe.cn/index.php/product/product/663.html">电涌保护器</a>
+                                <a href="http://www.anpe.cn/index.php/product/product/935.html">智能数字显示仪表</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li cur="select">
+                    <a href="http://www.anpe.cn/index.php/select/select.html">选型 <i></i></a>
+                    <div class="list">
+                        <div class="font">
+                            <div class="ti">选型</div>
+                            <div class="clear">
+                                <a href="http://www.anpe.cn/index.php/select/select/102.html">隔离式安全栅</a>
+                                <a href="http://www.anpe.cn/index.php/select/select/103.html">隔离器</a>
+                                <a href="http://www.anpe.cn/index.php/select/select/104.html">温度变送器</a>
+                                <a href="http://www.anpe.cn/index.php/select/select/106.html">电涌保护器</a>
+                                <a href="http://www.anpe.cn/index.php/select/select/107.html">电量变送器</a>
+                                <a href="http://www.anpe.cn/index.php/select/select/108.html">智能数字显示仪表</a>
+                                <a href="http://www.anpe.cn/index.php/select/select/109.html">防爆测位仪</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+                <li cur="application">
+                    <a href="http://www.anpe.cn/index.php/application/application.html">应用 <i></i></a>
+                    <div class="list">
+                        <div class="font">
+                            <div class="ti">应用</div>
+                            <div class="clear">
+                                <a href="http://www.anpe.cn/index.php/application/detail/12.html">石化 </a>
+                                <a href="http://www.anpe.cn/index.php/application/detail/13.html">油气</a>
+                                <a href="http://www.anpe.cn/index.php/application/detail/14.html">冶金</a>
+                                <a href="http://www.anpe.cn/index.php/application/detail/15.html">市政工程</a>
+                                <a href="http://www.anpe.cn/index.php/application/detail/16.html">电力工程</a>
+                                <a href="http://www.anpe.cn/index.php/application/detail/17.html">生物制药</a>
+                                <a href="http://www.anpe.cn/index.php/application/detail/18.html">军工、航空航天</a>
+                                <a href="http://www.anpe.cn/index.php/application/detail/19.html">环保</a>
+                                <a href="http://www.anpe.cn/index.php/application/detail/20.html">轨道交通</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+
+                <li cur="service">
+                    <a href="http://www.anpe.cn/index.php/service/after.html">服务 <i></i></a>
+                    <div class="list">
+                        <div class="font">
+                            <div class="ti">服务</div>
+                            <div class="clear">
+                                <a href="http://www.anpe.cn/index.php/service/after.html">售后服务</a>
+                                <a href="http://www.anpe.cn/index.php/service/ques.html">常见问题</a>
+                                <a href="http://www.anpe.cn/index.php/service/tech.html">技术支持</a>
+                                <a href="http://www.anpe.cn/index.php/service/customer.html">客户培训</a>
+                                <a href="http://www.anpe.cn/index.php/service/idea.html">意见反馈</a>
+                                <a href="http://www.anpe.cn/index.php/service/examine.html">满意度调查</a>
+                                <a href="http://www.anpe.cn/index.php/service/baoming.html">报名登记</a>
+                                <a href="http://www.anpe.cn/index.php/service/download.html">下载中心</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+                <li cur="contact">
+                    <a href="http://www.anpe.cn/index.php/contact/ding.html">联系 <i></i></a>
+                    <div class="list">
+                        <div class="font">
+                            <div class="ti">联系</div>
+                            <div class="clear">
+                                <a href="http://www.anpe.cn/index.php/contact/ding.html">商务订货</a>
+                                <!-- <a href="https://wpa.qq.com/msgrd?v=3&uin=2753392192&site=qq&menu=yes" target="_blank">在线咨询</a> -->
+                                <a href="http://www.anpe.cn/index.php/contact/apply.html">试用申请</a>
+                                <!-- <a href="http://www.anpe.cn/index.php/contact/tech.html">技术支持</a> -->
+                                <a href="http://www.anpe.cn/index.php/contact/partner.html">成为合作伙伴</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+                <li cur="join">
+                    <a href="http://www.anpe.cn/index.php/join/policy.html">HR <i></i></a>
+                    <div class="list">
+                        <div class="font">
+                            <div class="ti">HR</div>
+                            <div class="clear">
+                                <a href="http://www.anpe.cn/index.php/join/policy.html">人才政策</a>
+                                <a href="http://www.anpe.cn/index.php/join/join.html">人才招聘</a>
+                                <a href="http://www.anpe.cn/index.php/join/active.html">团建活动</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+            <form class="right" action="http://www.anpe.cn/index.php/api/search.html" method="get">
+                <input type="text" class="text" placeholder="关键词/型号/产品名称" name="search" required="required">
+                <input type="submit" class="submit" value="提交">
+            </form>
+        </div>
+
+    </div>
+</div>
+<!-- mhead -->
+<div class="head-m">
+    <a href="http://www.anpe.cn/index.php/welcome.html" class="logo left"><img src="/front/images/logo.png" alt=""></a>
+    <div class="dz right">
+        <a href="http://www.anpe.cn/index.php/login/login.html">登录</a>
+        <a href="http://www.anpe.cn/index.php/login/register.html">注册</a>
+    </div>
+    <div class="menu_div">
+            <span>
+              <i></i>
+              <i></i>
+              <i></i>
+            </span>
+    </div>
+
+    <ul class="m_ul">
+        <li>
+            <a href="">首页</a>
+        </li>
+        <li>
+            <a href="javascript:;">公司<i>+</i></a>
+            <p>
+                <a href="http://www.anpe.cn/index.php/about/profile.html">公司简介</a>
+                <a href="http://www.anpe.cn/index.php/about/idea.html">企业理念</a>
+                <a href="http://www.anpe.cn/index.php/about/leader.html">企业领军</a>
+                <a href="http://www.anpe.cn/index.php/about/honour.html">资质荣誉</a>
+                <a href="http://www.anpe.cn/index.php/about/produce.html">智能制造</a>
+                <a href="http://www.anpe.cn/index.php/about/mix.html">两化融合</a>
+                <a href="http://www.anpe.cn/index.php/about/tech.html">技术研发</a>
+            </p>
+        </li>
+        <li>
+            <a href="javascript:;">新闻<i>+</i></a>
+            <p>
+                <a href="http://www.anpe.cn/index.php/news/cid/50.html">新闻</a>
+                <a href="http://www.anpe.cn/index.php/news/cid/51.html">展会</a>
+                <a href="http://www.anpe.cn/index.php/news/cid/52.html">媒体关注</a>
+                <a href="http://www.anpe.cn/index.php/news/cid/53.html">管理内刊</a>
+                <a href="http://www.anpe.cn/index.php/news/cid/54.html">产品故事</a>
+                <a href="http://www.anpe.cn/index.php/news/cid/55.html">电子智造</a>
+                <a href="http://www.anpe.cn/index.php/news/cid/56.html">行业快讯</a>
+                <a href="http://www.anpe.cn/index.php/news/cid/57.html">知识分享</a>
+            </p>
+        </li>
+        <li>
+            <a href="javascript:;">产品<i>+</i></a>
+            <p>
+                <a href="http://www.anpe.cn/index.php/product/product/660.html">隔离式安全栅</a>
+                <a href="http://www.anpe.cn/index.php/product/product/661.html">隔离器</a>
+                <a href="http://www.anpe.cn/index.php/product/product/811.html">温度变送器</a>
+                <a href="http://www.anpe.cn/index.php/product/product/663.html">电涌保护器</a>
+                <a href="http://www.anpe.cn/index.php/product/product/935.html">智能数字显示仪表</a>
+            </p>
+        </li>
+        <li>
+            <a href="javascript:;">选型<i>+</i></a>
+            <p>
+                <a href="http://www.anpe.cn/index.php/select/select/102.html">隔离式安全栅</a>
+                <a href="http://www.anpe.cn/index.php/select/select/103.html">隔离器</a>
+                <a href="http://www.anpe.cn/index.php/select/select/104.html">温度变送器</a>
+                <a href="http://www.anpe.cn/index.php/select/select/106.html">电涌保护器</a>
+                <a href="http://www.anpe.cn/index.php/select/select/107.html">电量变送器</a>
+                <a href="http://www.anpe.cn/index.php/select/select/108.html">智能数字显示仪表</a>
+                <a href="http://www.anpe.cn/index.php/select/select/109.html">防爆测位仪</a>
+            </p>
+        </li>
+        <li>
+            <a href="javascript:;">应用<i>+</i></a>
+            <p>
+                <a href="http://www.anpe.cn/index.php/application/detail/12.html">石化 </a>
+                <a href="http://www.anpe.cn/index.php/application/detail/13.html">油气</a>
+                <a href="http://www.anpe.cn/index.php/application/detail/14.html">冶金</a>
+                <a href="http://www.anpe.cn/index.php/application/detail/15.html">市政工程</a>
+                <a href="http://www.anpe.cn/index.php/application/detail/16.html">电力工程</a>
+                <a href="http://www.anpe.cn/index.php/application/detail/17.html">生物制药</a>
+                <a href="http://www.anpe.cn/index.php/application/detail/18.html">军工、航空航天</a>
+                <a href="http://www.anpe.cn/index.php/application/detail/19.html">环保</a>
+                <a href="http://www.anpe.cn/index.php/application/detail/20.html">轨道交通</a>
+            </p>
+        </li>
+        <li>
+            <a href="javascript:;">服务<i>+</i></a>
+            <p>
+                <a href="http://www.anpe.cn/index.php/service/after.html">售后服务</a>
+                <a href="http://www.anpe.cn/index.php/service/ques.html">常见问题</a>
+                <a href="http://www.anpe.cn/index.php/service/tech.html">技术支持</a>
+                <a href="http://www.anpe.cn/index.php/service/customer.html">客户培训</a>
+                <a href="http://www.anpe.cn/index.php/service/idea.html">意见反馈</a>
+                <a href="http://www.anpe.cn/index.php/service/examine.html">满意度调查</a>
+                <a href="http://www.anpe.cn/index.php/service/baoming.html">报名登记</a>
+                <a href="http://www.anpe.cn/index.php/service/download.html">下载中心</a>
+            </p>
+        </li>
+        <li>
+            <a href="javascript:;">联系<i>+</i></a>
+            <p>
+                <a href="http://www.anpe.cn/index.php/contact/ding.html">商务订货</a>
+                <!-- <a href="https://wpa.qq.com/msgrd?v=3&uin=2753392192&site=qq&menu=yes" target="_blank">在线咨询</a> -->
+                <a href="http://www.anpe.cn/index.php/contact/apply.html">试用申请</a>
+                <a href="http://www.anpe.cn/index.php/contact/partner.html">成为合作伙伴</a>
+            </p>
+        </li>
+        <li>
+            <a href="javascript:;">HR<i>+</i></a>
+            <p>
+                <a href="http://www.anpe.cn/index.php/join/policy.html">人才政策</a>
+                <a href="http://www.anpe.cn/index.php/join/join.html">人才招聘</a>
+                <a href="http://www.anpe.cn/index.php/join/active.html">团建活动</a>
+            </p>
+        </li>
+        <!-- <div class="huan">
+            <a href="">中文</a> / <a href="">English</a>
+        </div> -->
+        <a href="http://www.anpe.cn/index.php/select/inquiry.html" class="wode">我的选型 <i>1</i></a>
+    </ul>
+
+</div>
+<!-- pc -->
+<div class="banner pcbanner" aos="fade-zoom-in">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <a href="http://www.anpe.cn/index.php/news/detail/2202.html"><img src="/front/images/15770747609495r6wzq.jpg"
+                                                                                  alt=""></a>
+            </div>
+            <div class="swiper-slide">
+                <a href="/index.php/news/detail/2036.html"><img src="/front/images/157561411669617adei.jpg" alt=""></a>
+            </div>
+            <div class="swiper-slide">
+                <a href="\index.php\product\product\660.html"><img src="/front/images/1562051047873ok1fw.jpg" alt=""></a>
+            </div>
+            <div class="swiper-slide">
+                <a href="\index.php\product\product\663.html"><img src="/front/images/15743062855051yy016.jpg" alt=""></a>
+            </div>
+            <div class="swiper-slide">
+                <a href="\index.php\product\product\811.html"><img src="/front/images/15743027996314zf40e.jpg" alt=""></a>
+            </div>
+            <div class="swiper-slide">
+                <a href="\index.php\about\tech.html"><img src="/front/images/15630001263164oug3g.jpg" alt=""></a>
+            </div>
+            <div class="swiper-slide">
+                <a href="\index.php\service\after.html"><img src="/front/images/1563001326409dj3fy.jpg" alt=""></a>
+            </div>
+
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+<!-- 手机 -->
+<div class="banner mbanner" aos="fade-zoom-in">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <a href=""><img src="/front/images/775cfdc012aa4938b1b668aac5e99d02.gif" alt=""></a>
+            </div>
+            <div class="swiper-slide">
+                <a href=""><img src="/front/images/775cfdc012aa4938b1b668aac5e99d02.gif" alt=""></a>
+            </div>
+            <div class="swiper-slide">
+                <a href=""><img src="/front/images/775cfdc012aa4938b1b668aac5e99d02.gif" alt=""></a>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+<div style="position: relative;height:1px;">
+    <div style="position: absolute; top: -300px;" class="xian" id="br"></div>
+</div>
+<div class="wel-ban content">
+    <div class="wel-title" aos="fade-left">
+        品牌<span>brand</span>
+    </div>
+    <div class="wb-c">
+        <div class="wb-vid" aos="fade-up">
+            <div class="wb-t" hr="http://player.youku.com/embed/XNDQxOTAxODMwNA==?client_id=01cb99474f096a04">
+                <div class="pic">
+                    <img src="http://www.anpe.cn/web/upload/2019/10/30/15724284451284c2ncs.jpg" alt="">
+                </div>
+                <div class="top">
+                    <img src="/front/images/vbtn.png" class="center">
+                </div>
+            </div>
+            <div class="de">
+                <a href="http://www.anpe.cn/index.php/news/cid/52.html">媒体关注</a>
+                <a href="http://www.anpe.cn/index.php/join/active.html">团建活动</a>
+                <a href="http://www.anpe.cn/index.php/video/more.html">视频中心<img src="/front/images/more.png" alt=""></a>
+            </div>
+        </div>
+        <div class="xb-video">
+            <div class="center">
+                <i onclick="cli()">+</i>
+                <!-- <img src="images/c.png" alt="" onclick="cli()" class='i'> -->
+                <iframe width="660" height="400" src="" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <a href="javascript:;" class="wb-ar" aos="fade-up">
+            <div class="wb-t" hr="http://player.youku.com/embed/XNDQ1NzY2ODM5Ng==?client_id=01cb99474f096a04">
+                <div class="pic"><img
+                        src="/front/images/1575874632042744cw5.jpg" alt="">
+                    <div class="top">
+                        <img src="/front/images/vbtn.png" class="center" style="width:auto;transform: translate(-50%, -50%)">
+                    </div>
+                </div>
+            </div>
+            <div class="de">“VR”看优倍</div>
+        </a>
+        <a href="http://www.anpe.cn/index.php/news/cid/53.html" class="wb-book" aos="fade-up">
+            <div class="pic">
+                <img src="http://www.anpe.cn/web/upload/2019/07/17/15633546060114u62pn.png" alt="">
+            </div>
+            <div class="de">管理内刊</div>
+        </a>
+        <a href="http://www.anpe.cn/index.php/news/cid/54.html" class="wb-book" aos="fade-up">
+            <div class="pic">
+                <img src="http://www.anpe.cn/web/upload/2019/07/17/1563354659562551d43.png" alt="">
+            </div>
+            <div class="de">产品故事</div>
+        </a>
+        <a href="http://www.anpe.cn/index.php/news/cid/55.html" class="wb-book" aos="fade-up">
+            <div class="pic">
+                <img src="http://www.anpe.cn/web/upload/2019/07/17/15633546876783p0ta9.png" alt="">
+            </div>
+            <div class="de">电子智造</div>
+        </a>
+    </div>
+</div>
+<div class="wel-prod content">
+    <div class="wel-title" aos="fade-left">
+        产品<span>product</span>
+    </div>
+    <div class="pro-more" aos="fade-up">
+        <a href="http://www.anpe.cn/index.php/product/product.html">更多产品 <img src="/front/images/mo.png" alt=""></a>
+    </div>
+    <div class="prod" aos="fade-up">
+
+        <a href="http://www.anpe.cn/index.php/product/detail/667.html" aos="fade-up">
+            <div class="pic">
+                <img src="http://www.anpe.cn/web/upload/2019/10/12/157085901208349mjqk.jpg" alt="">
+            </div>
+            <p>隔离式安全栅</p>
+
+        </a>
+        <a href="http://www.anpe.cn/index.php/product/detail/668.html" aos="fade-up">
+            <div class="pic">
+                <img src="http://www.anpe.cn/web/upload/2019/10/12/15708600828779o8vl2.jpg" alt="">
+            </div>
+            <p>隔离器</p>
+
+        </a>
+        <a href="http://www.anpe.cn/index.php/product/detail/951.html" aos="fade-up">
+            <div class="pic">
+                <img src="http://www.anpe.cn/web/upload/2019/10/12/15708605177397dw4e4.jpg" alt="">
+            </div>
+            <p>温度变送器</p>
+
+        </a>
+        <a href="http://www.anpe.cn/index.php/product/product/811.html" aos="fade-up">
+            <div class="pic">
+                <img src="http://www.anpe.cn/web/upload/2019/12/03/1575342127611nvzbn.jpg" alt="">
+            </div>
+            <p>一体化温度变送模块</p>
+
+        </a>
+        <a href="http://www.anpe.cn/index.php/product/detail/946.html" aos="fade-up">
+            <div class="pic">
+                <img src="http://www.anpe.cn/web/upload/2019/07/30/156445071268961pcq4.jpg" alt="">
+            </div>
+            <p>信号电涌保护器</p>
+
+        </a>
+        <a href="http://www.anpe.cn/index.php/product/detail/938.html" aos="fade-up">
+            <div class="pic">
+                <img src="http://www.anpe.cn/web/upload/2019/07/30/15644507256416w4ivz.jpg" alt="">
+            </div>
+            <p>通讯电涌保护器</p>
+
+        </a>
+        <a href="http://www.anpe.cn/index.php/product/detail/945.html" aos="fade-up">
+            <div class="pic">
+                <img src="http://www.anpe.cn/web/upload/2019/07/30/156445076484310fisl.jpg" alt="">
+            </div>
+            <p>电源电涌保护器</p>
+
+        </a>
+        <a href="http://www.anpe.cn/index.php/product/product/935.html" aos="fade-up">
+            <div class="pic">
+                <img src="http://www.anpe.cn/web/upload/2019/11/20/15742191044054msoyg.jpg" alt="">
+            </div>
+            <p>智能数字显示仪表</p>
+
+        </a>
+
+    </div>
+</div>
+<div class="wel-info content">
+    <div class="wel-title" aos="fade-left">
+        资讯<span>Information</span>
+    </div>
+    <div class="info-t" aos="fade-up">
+        <a href="http://www.anpe.cn/index.php/news/cid/50.html" class="news" c-data=50>新闻</a>
+        <a href="http://www.anpe.cn/index.php/news/cid/51.html" class="news" c-data=51>展会</a>
+        <a href="http://www.anpe.cn/index.php/news/cid/57.html" class="news" c-data=57>知识</a>
+        <a href="http://www.anpe.cn/index.php/news/cid/56.html" class="news" c-data=56>快讯</a>
+        <a href="http://www.anpe.cn/index.php/news/cid/50.html">更多<i></i></a>
+    </div>
+    <script type="text/javascript">
+        $('.news').click(function () {
+            let cid = $(this).attr('c-data');
+            let limit = 5;
+            let data = {cid: cid, limit: limit};
+            $.ajax({
+                url: 'http://www.anpe.cn/index.php/api/getNews.html',
+                type: 'POST',
+                dataType: 'json',
+                data: {data: data, time: '1577775035', token: 'e52ce0db062f55b90742ea3b1e3cf654', 'ci_csrf_token': ''}
+            })
+                // 完成之后
+                .done(function (data) {
+                    console.log(data);
+                    let html = '';
+                    if (data.sta == 1) {
+                        for (let i in data.list) {
+                            html += '<a href="' + data.list[i].url + '"><div class="ra"><div class="zi"> <i></i>' + data.list[i].title + '</div><div class="date">' + data.list[i].date + '</div></div></a>';
+                        }
+                        $('.getNews').html(html);
+
+                    }
+
+
+                })
+
+
+            return false;
+        });
+    </script>
+    <div class="wel-new clear">
+        <div class="left" aos="fade-right">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <a href="http://www.anpe.cn/index.php/news/detail/2203.html">
+                            <div class="pic"><img src="http://www.anpe.cn/web/upload/2019/12/23/1577086874957sg7tb.jpg"
+                                                  alt=""></div>
+                            <div class="font">
+                                <div class="time">12-23</div>
+                                <div class="ti">
+                                    <div class="tit">中石化框架招标：优倍浪涌保护器荣获第一，安全栅再度入围</div>
+                                    <div class="de">为优倍电气与中石化持续广泛而深度的合作奠定了基础。</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="http://www.anpe.cn/index.php/news/detail/2034.html">
+                            <div class="pic"><img src="http://www.anpe.cn/web/upload/2019/12/04/15754377312719u8l7v.jpg"
+                                                  alt=""></div>
+
+                            <div class="font">
+                                <div class="time">12-04</div>
+                                <div class="ti">
+                                    <div class="tit">品质制胜，立足国门，走向世界—智汇工业专访南京优倍电气有限公司董事长董健</div>
+                                    <div class="de">智汇工业专访南京优倍电气有限公司董事长董健</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="http://www.anpe.cn/index.php/news/detail/1976.html">
+                            <div class="pic"><img src="http://www.anpe.cn/web/upload/2019/11/29/15750160179269iv0oi.jpg"
+                                                  alt=""></div>
+
+                            <div class="font">
+                                <div class="time">11-29</div>
+                                <div class="ti">
+                                    <div class="tit">MICONEX多国展：优倍仪表新品倍出，智能工厂实时远程参展</div>
+                                    <div class="de">北京国家会议中心 E3馆-A265 优倍电气</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="http://www.anpe.cn/index.php/news/detail/1975.html">
+                            <div class="pic"><img src="http://www.anpe.cn/web/upload/2019/11/29/15750158946777pmmsc.jpg"
+                                                  alt=""></div>
+
+                            <div class="font">
+                                <div class="time">11-29</div>
+                                <div class="ti">
+                                    <div class="tit">来自优倍你我的感悟——责任、担当、使命</div>
+                                    <div class="de">
+                                        公司组织全体员工再次深入学习和领悟董健董事长“责任、担当、使命”的寄托，257位员工自发地将此感悟与实际工作相结合进行了总结与分享。经公司评选，以下员工获得优秀分享奖
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        <div class="right getNews" aos="fade-left">
+            <a href="http://www.anpe.cn/index.php/news/detail/2202.html">
+                <div class="ra">
+                    <div class="zi"><i></i>中石化框架招标：优倍浪涌保护器荣获第一，安全栅再度入围</div>
+                    <div class="date">12-23</div>
+                </div>
+            </a>
+            <a href="http://www.anpe.cn/index.php/news/detail/2036.html">
+                <div class="ra">
+                    <div class="zi"><i></i>关于优倍电气H5自适应网站全新改版上线试运行的公告</div>
+                    <div class="date">12-06</div>
+                </div>
+            </a>
+            <a href="http://www.anpe.cn/index.php/news/detail/2035.html">
+                <div class="ra">
+                    <div class="zi"><i></i>品质制胜，立足国门，走向世界—智汇工业专访南京优倍电气有限公司董事长董健</div>
+                    <div class="date">12-03</div>
+                </div>
+            </a>
+            <a href="http://www.anpe.cn/index.php/news/detail/1963.html">
+                <div class="ra">
+                    <div class="zi"><i></i>MICONEX多国展：优倍仪表新品倍出，智能工厂实时远程参展</div>
+                    <div class="date">11-27</div>
+                </div>
+            </a>
+            <a href="http://www.anpe.cn/index.php/news/detail/1706.html">
+                <div class="ra">
+                    <div class="zi"><i></i>来自优倍你我的感悟——责任、担当、使命</div>
+                    <div class="date">11-01</div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</div>
+<div class="prod content wel-d">
+    <a href="http://www.anpe.cn/index.php/select/select.html" aos="fade-right">
+        <div class="pic">
+            <img src="/front/images/d1.jpg" alt="">
+
+        </div>
+        <p>快速选型</p>
+    </a>
+    <a href="http://www.anpe.cn/index.php/service/after.html" aos="fade-right">
+        <div class="pic">
+            <img src="/front/images/d2.jpg" alt="">
+
+        </div>
+        <p>客户服务</p>
+    </a>
+    <a href="http://www.anpe.cn/index.php/application/application.html" aos="fade-left">
+        <div class="pic">
+            <img src="/front/images/d3.jpg" alt="">
+
+        </div>
+        <p>行业应用</p>
+    </a>
+    <a href="http://www.anpe.cn/index.php/service/download.html" aos="fade-left">
+        <div class="pic">
+            <img src="/front/images/d4.jpg" alt="">
+
+        </div>
+        <p>资料下载</p>
+    </a>
+</div>
+<footer th:replace="front/footer::footer"></footer>
+</body>
+<script>
+    function cli(){
+        $('.xb-video').fadeOut();
+        var src = '';
+        $('.xb-video').find('iframe').attr('src',src);
+    }
+    $(function(){
+        //    $('.wb-vid .top').click(function() {
+        //     $(".xb-video").fadeIn();
+        //     $(".xb-video").find('video')[0].play();
+        //     $(".xb-video").find('video')[0].currentTime = 0;
+        // })
+        // $('.wb-c .xb-video i').click(function() {
+        //     $(".xb-video").fadeOut();
+        //     $(".xb-video").find('video')[0].pause();
+
+        // })
+
+        $('.wb-t').click(function(){
+            var hr = $(this).attr('hr');
+            $('.xb-video').fadeIn();
+            $('.xb-video').find('iframe').attr('src',hr);
+        })
+
+
+        $(".info-t a").eq(0).addClass('act');
+        $(".info-t a").click(function() {
+            $(this).addClass('act');
+            $(this).siblings().removeClass('act');
+        })
+        var swiper = new Swiper('.banner .swiper-container', {
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+            },
+            speed: 600,
+            loop: true,
+            autoplay: true,
+        });
+        var swiper = new Swiper('.wel-new .swiper-container', {
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+            },
+            loop: true,
+            autoplay: true,
+        });
+
+        // $('.wb-ar').click(function(){
+        //   alert('还在成长中，敬请期待哦！')
+        // })
+    })
+</script>
+</html>

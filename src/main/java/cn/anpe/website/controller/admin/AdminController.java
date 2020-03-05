@@ -55,7 +55,7 @@ public class AdminController {
         String code = (String) session.getAttribute(WebConst.IDENTIFY_CODE);
         System.out.println(code);
         if (!code.toUpperCase().equals(captcha.toUpperCase())) {
-            resultVo.setCode(ResultVo.IDENTFIY_CODE_WRONG);//验证码错误
+            resultVo.setCode(ResultVo.MISSING);//验证码错误
             resultVo.setData("验证码错误");
             return resultVo;
         }
