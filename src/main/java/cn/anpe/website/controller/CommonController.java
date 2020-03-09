@@ -48,6 +48,9 @@ public class CommonController {
      * @PathParam 获取request 中name属性中对应的值 <input type="text" name="username">
      * @PathVariable 获取mapping路径中的值  @PostMapping("uploadImg/{id}")
      * @RequestParam 获取request头中的属性
+     * 库表结构：
+     * 设计思想：
+     * 根据第三范式规范要求，进行。。。。中间为了避免什么xx问题，如何解决，为了解决多对多关系存储，添加了xx_xx的中间表  联合主键  索引
      */
     @PostMapping("uploadImg")
     @ResponseBody

@@ -25,4 +25,6 @@ public interface RotationMapper extends Mapper<Rotation> {
      * @return
      */
     List<Rotation> selectRotationShowList();
+    //更新轮播图显示状态
+    int changeRotationShowStatus(@Param("rid") String rid,@Param("status") int status);
 }

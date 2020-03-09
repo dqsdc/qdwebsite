@@ -37,4 +37,12 @@ public interface RotationService {
      * @return 轮播图列表数据
      */
     List<Rotation> selectRotationShowList();
+
+    /**
+     * 快捷改变轮播图显示状态  1为显示，2为隐藏
+     * @param rid
+     * @param status
+     * @return
+     */
+    boolean changeRotationShowStatus(String rid,int status);
 }

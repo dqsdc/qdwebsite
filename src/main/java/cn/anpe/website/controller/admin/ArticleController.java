@@ -15,6 +15,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -174,5 +175,26 @@ public class ArticleController {
         rotationService.addRotation(rotation);
         resultVo.setCode(ResultVo.SUCCESS);
         return resultVo;
+    }
+
+    @RequestMapping("changeRotationShowStatus")
+    @ResponseBody
+    public ResultVo changeRotationShowStatus(@RequestParam("rid") String rid,int status){
+        System.out.println(rid+"   "+status);
+        ResultVo resultVo = new ResultVo();
+        if (status>1||status<0) {
+            resultVo.setCode(404);
+            resultVo.setData("无效的状态码");
+            return resultVo;
+        }
+        if (rotationService.changeRotationShowStatus(rid,status)){
+            resultVo.setCode(200);
+            resultVo.setData("success");
+        }else {
+            resultVo.setCode(400);
+            resultVo.setData("update had failed");
+        }
+        return resultVo;
+
     }
 }

@@ -91,6 +91,7 @@
                                             </td>
                                             <td>
                                                 <div style="display: flex;width: 100%;justify-content: space-around">
+                                                    <a class="btn btn-xs btn-default" data-toggle="tooltip" th:data-appid="${rotation.rid}" onclick="status_change(this,this.dataset.appid)" ><i th:class="'mdi '+${rotation.isShow==1?'mdi-eye-off-outline':'mdi-eye-outline'}"></i></a>
                                                     <a class="btn btn-xs btn-default" th:href="${'/article/showUpdateArticle/'+rotation.rid}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
                                                     <a class="btn btn-xs btn-default" href="#!" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
                                                 </div>
@@ -129,6 +130,38 @@
 
 
 </body>
+<script>
+    /*-发布*/
+    function status_change(obj,rId){
+        console.log(rId);
+        layer.confirm('确定要更改状态？',function(index){
+            $.ajax({
+                type: 'POST',
+                url: '/article/changeRotationShowStatus',
+                data: {
+                  'rid':rId,
+                  'status':0
+                },
+                success: function(data){
+                    if (data.code===200){
+                        console.log("data success");
+                    layer.msg('已停用!',{icon: 6,time:1000});
+                    setTimeout(function(){
+                        window.location.reload();
+                    }, 1000);}
+                    else {
+                        alert(data.data);
+                    }
+                },
+                error:function(data) {
+                    alert("error");
+                    console.log(data.msg);
+                },
+            });
+        });
+    }
+</script>
+
 <script type="text/javascript">
     $(function () {
         $('#search').on('input', (function () {

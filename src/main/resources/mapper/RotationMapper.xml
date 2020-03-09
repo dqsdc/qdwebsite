@@ -23,4 +23,8 @@
   <select id="selectRotationShowList" resultMap="BaseResultMap">
         select * from rotation WHERE is_show=1 ORDER BY sort
   </select>
+
+  <update id="changeRotationShowStatus">
+    update rotation set is_show=#{status} where rid=#{rid}
+  </update>
 </mapper>
