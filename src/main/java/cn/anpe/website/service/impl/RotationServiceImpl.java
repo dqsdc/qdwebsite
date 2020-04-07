@@ -46,4 +46,22 @@ public class RotationServiceImpl implements RotationService {
     public boolean changeRotationShowStatus(String rid, int status) {
         return rotationMapper.changeRotationShowStatus(rid, status) == 1;
     }
+
+    @Override
+    public Rotation selectRotationByRid(String rid) {
+        return rotationMapper.selectByPrimaryKey(rid);
+    }
+
+    @Override
+    public int updateRotation(Rotation rotation) {
+        return rotationMapper.updateByPrimaryKeySelective(rotation);
+    }
+
+    @Override
+    public boolean deleteRotation(String rid) {
+        int i = rotationMapper.deleteByPrimaryKey(rid);
+        return i == 1;
+    }
+
+
 }

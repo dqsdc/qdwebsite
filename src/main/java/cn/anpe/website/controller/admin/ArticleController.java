@@ -141,7 +141,7 @@ public class ArticleController {
         model.addObject("rotations", rotations);
         model.addObject("total", Math.ceil(total / 10.0));
         model.addObject("active", 1);
-        model.addObject("DateKit",new DateKit());
+        model.addObject("DateKit", new DateKit());
         model.setViewName("admin/rotation_list");
         return model;
     }
@@ -154,13 +154,13 @@ public class ArticleController {
         model.addObject("rotations", rotations);
         model.addObject("total", Math.ceil(total / 10.0));
         model.addObject("active", page);
-        model.addObject("DateKit",new DateKit());
+        model.addObject("DateKit", new DateKit());
         model.setViewName("admin/rotation_list");
         return model;
     }
 
     @RequestMapping("showRotationAdd")
-    public  String getRotationAdd() {
+    public String getRotationAdd() {
         return "admin/rotation_add";
     }
 
@@ -171,7 +171,7 @@ public class ArticleController {
         ResultVo resultVo = new ResultVo();
         rotation.setRid(UUID.UU32());
         rotation.setCreateTime((long) DateKit.getCurrentUnixTime());
-        System.out.println("rotation:  "+rotation);
+        System.out.println("rotation:  " + rotation);
         rotationService.addRotation(rotation);
         resultVo.setCode(ResultVo.SUCCESS);
         return resultVo;
@@ -179,22 +179,69 @@ public class ArticleController {
 
     @RequestMapping("changeRotationShowStatus")
     @ResponseBody
-    public ResultVo changeRotationShowStatus(@RequestParam("rid") String rid,int status){
-        System.out.println(rid+"   "+status);
+    public ResultVo changeRotationShowStatus(@RequestParam("rid") String rid, int status) {
+        System.out.println(rid + "   " + status);
         ResultVo resultVo = new ResultVo();
-        if (status>1||status<0) {
+        if (status > 1 || status < 0) {
             resultVo.setCode(404);
             resultVo.setData("无效的状态码");
             return resultVo;
         }
-        if (rotationService.changeRotationShowStatus(rid,status)){
+        if (status == 0) {
+            status = 1;
+        } else {
+            status = 0;
+        }
+        if (rotationService.changeRotationShowStatus(rid, status)) {
             resultVo.setCode(200);
             resultVo.setData("success");
-        }else {
+        } else {
             resultVo.setCode(400);
             resultVo.setData("update had failed");
         }
         return resultVo;
 
+    }
+
+    @RequestMapping("showRotationUpdate/{rid}")
+    public ModelAndView getRotationUpdate(@PathVariable("rid") String rid, ModelAndView model) {
+        Rotation rotation = rotationService.selectRotationByRid(rid);
+        if (rotation == null) {
+            model.setViewName("error/404");
+            model.addObject("msg", "轮播图丢失了");
+            return model;
+        }
+        model.setViewName("admin/rotation_update");
+        model.addObject("rotation", rotation);
+        return model;
+    }
+
+    @ApiOperation("更新轮播图")
+    @RequestMapping("updateRotation")
+    @ResponseBody
+    public ResultVo updateRotation(Rotation rotation) {
+        ResultVo resultVo = new ResultVo();
+        System.out.println(rotation);
+        if (rotation.getImgUrl().equals("")) rotation.setImgUrl(null);
+        rotation.setUpdateTime((long) DateKit.getCurrentUnixTime());
+        int i = rotationService.updateRotation(rotation);
+        resultVo.setCode(ResultVo.SUCCESS);
+        return resultVo;
+    }
+
+    @ApiOperation("删除轮播图")
+    @RequestMapping("deleteRotation/{rid}")
+    @ResponseBody
+    public ResultVo deleteRotation(@PathVariable("rid") String rid) {
+        ResultVo resultVo = new ResultVo();
+
+        boolean flag = rotationService.deleteRotation(rid);
+
+        if (flag) {
+            resultVo.setCode(ResultVo.SUCCESS);
+            return resultVo;
+        }
+        resultVo.setCode(ResultVo.MISSING);
+        return resultVo;
     }
 }

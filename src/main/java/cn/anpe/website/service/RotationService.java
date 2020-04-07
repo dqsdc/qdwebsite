@@ -45,4 +45,25 @@ public interface RotationService {
      * @return
      */
     boolean changeRotationShowStatus(String rid,int status);
+
+    /**
+     * 查询对应rotation信息
+     * @param rid 唯一id
+     * @return 需要查询的对象
+     */
+    Rotation selectRotationByRid(String rid);
+
+    /**
+     * 更新轮播图
+     * @param rotation
+     * @return
+     */
+    int updateRotation(Rotation rotation);
+
+    /**
+     * 删除轮播图
+     * @param rid 要删除的主键id
+     * @return 是否删除成功
+     */
+    boolean deleteRotation(String rid);
 }

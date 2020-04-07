@@ -46,7 +46,7 @@ public class IndexController {
         model.addObject("rotations", rotations);
         model.addObject("articles", articles);
         model.addObject("dateKit",new DateKit());
-        model.setViewName("front/Index");
+        model.setViewName("front/index");
         return model;
     }
 }

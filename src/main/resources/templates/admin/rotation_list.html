@@ -91,9 +91,9 @@
                                             </td>
                                             <td>
                                                 <div style="display: flex;width: 100%;justify-content: space-around">
-                                                    <a class="btn btn-xs btn-default" data-toggle="tooltip" th:data-appid="${rotation.rid}" onclick="status_change(this,this.dataset.appid)" ><i th:class="'mdi '+${rotation.isShow==1?'mdi-eye-off-outline':'mdi-eye-outline'}"></i></a>
-                                                    <a class="btn btn-xs btn-default" th:href="${'/article/showUpdateArticle/'+rotation.rid}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
-                                                    <a class="btn btn-xs btn-default" href="#!" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                                                    <a class="btn btn-xs btn-default" data-toggle="tooltip" th:data-ishow="${rotation.isShow}" th:data-appid="${rotation.rid}" onclick="status_change(this,this.dataset.appid,this.dataset.ishow)" ><i th:class="'mdi '+${rotation.isShow==1?'mdi-eye-off-outline':'mdi-eye-outline'}"></i></a>
+                                                    <a class="btn btn-xs btn-default" onclick="update(this.dataset.appid)" th:data-appid="${rotation.rid}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
+                                                    <a class="btn btn-xs btn-default" href="#!" title="删除" th:data-appid="${rotation.rid}" onclick="deleteRotation(this.dataset.appid)" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -131,21 +131,47 @@
 
 </body>
 <script>
+    function deleteRotation(rid) {
+        layer.confirm('确定要删除吗？',function(){
+            $.ajax({
+                type: 'POST',
+                url: '/article/deleteRotation/'+rid,
+                success: function(data){
+                    if (data.code===200){
+                        console.log("data success");
+                        layer.msg('已删除!',{icon: 6,time:1000});
+                        setTimeout(function(){
+                            window.location.reload();
+                        }, 1000);}
+                    else {
+                        alert(data.data);
+                    }
+                },
+                error:function(data) {
+                    layer.msg('删除失败!',{icon: 5,time:1000});
+                    setTimeout(function(){
+                        window.location.reload();
+                    }, 1000);
+                    console.log(data.msg);
+                },
+            });
+        });
+    }
     /*-发布*/
-    function status_change(obj,rId){
+    function status_change(obj,rId,show){
         console.log(rId);
-        layer.confirm('确定要更改状态？',function(index){
+        layer.confirm('确定要更改状态？',function(){
             $.ajax({
                 type: 'POST',
                 url: '/article/changeRotationShowStatus',
                 data: {
                   'rid':rId,
-                  'status':0
+                  'status':show
                 },
                 success: function(data){
                     if (data.code===200){
                         console.log("data success");
-                    layer.msg('已停用!',{icon: 6,time:1000});
+                    layer.msg('已更改!',{icon: 6,time:1000});
                     setTimeout(function(){
                         window.location.reload();
                     }, 1000);}
@@ -190,6 +216,20 @@
             }
         });
     });
+
+    function update(rid){
+        layer.open({
+            type: 2,
+            title: '修改轮播图',
+            shadeClose: true,
+            shade: false,
+            area: ['1000px', '550px'],
+            content: '/article/showRotationUpdate/'+rid,
+            end: function () {//finally
+                location.reload();
+            }
+        });
+    }
 
     function layer_show(title,url,w,h){
         if (title == null || title == '') {
