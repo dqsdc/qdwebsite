@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface MetaArticleMapper extends Mapper<MetaArticle> {
    List<MetaArticle> selectByAid(@Param("aid") String aid);
+   int deleteAllByAid(@Param("aid") String aid);
 }

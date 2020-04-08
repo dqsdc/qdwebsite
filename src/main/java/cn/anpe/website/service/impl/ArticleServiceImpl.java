@@ -122,5 +122,13 @@ public class ArticleServiceImpl implements ArticleService {
         return metaMapper.selectMetaIdsByAid(aid);
     }
 
+    @Transactional
+    @Override
+    public boolean deleteArticle(String aid) {
+        int i1 = metaArticleMapper.deleteAllByAid(aid);
+        int i = articleMapper.deleteByPrimaryKey(aid);
+        return i == 1 && i1 > 0;
+    }
+
 
 }

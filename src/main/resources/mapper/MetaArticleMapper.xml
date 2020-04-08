@@ -9,4 +9,7 @@
   <select id="selectByAid" resultMap="BaseResultMap">
     SELECT * FROM  meta_article WHERE aid=#{aid}
   </select>
+  <delete id="deleteAllByAid">
+    delete from meta_article where aid=#{aid}
+  </delete>
 </mapper>

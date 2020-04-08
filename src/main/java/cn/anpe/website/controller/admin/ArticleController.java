@@ -134,6 +134,24 @@ public class ArticleController {
         return vo;
     }
 
+    /**
+     * 删除文章id
+     */
+    @PostMapping("deleteArticle/{aid}")
+    @ResponseBody
+    public ResultVo deleteArticle(@PathVariable("aid") String aid) {
+        ResultVo vo = new ResultVo();
+        boolean flag = articleService.deleteArticle(aid);
+        if (flag) {
+            vo.setCode(ResultVo.SUCCESS);
+            vo.setData("删除成功");
+            return vo;
+        }
+        vo.setCode(ResultVo.MISSING);
+        vo.setData("删除失败！");
+        return vo;
+    }
+
     @GetMapping("showRotationList")
     public ModelAndView showRotationList(ModelAndView model) {
         List<Rotation> rotations = rotationService.getAllRotationList(1, 10);

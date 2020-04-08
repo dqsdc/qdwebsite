@@ -56,4 +56,11 @@ public interface ArticleService {
     List<Meta> getMetasByAid(String aid);
 
     List<String> getMetaIdsByAid(String aid);
+
+    /**
+     * 删除文章
+     * @param aid 文章id
+     * @return
+     */
+    boolean deleteArticle(String aid);
 }

@@ -100,7 +100,7 @@
                                                     <a class="btn btn-xs btn-default" th:href="${'/article/detail/'+article.aid}" target="_blank" title="查看" data-toggle="tooltip"><i class="mdi mdi-search-web"></i></a>
                                                     <a th:if="${article.thumbImg!=null}" class="btn btn-xs btn-default" target="_blank" th:href="${article.thumbImg}" title="显示缩略图" data-toggle="tooltip"><i class="mdi mdi-image-filter-drama"></i></a>
                                                     <a class="btn btn-xs btn-default" th:href="${'/article/showUpdateArticle/'+article.aid}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
-                                                    <a class="btn btn-xs btn-default" href="#!" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                                                    <a class="btn btn-xs btn-default" href="#!" th:data-appid="${article.aid}" onclick="deleteArticle(this.dataset.appid)" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -138,9 +138,36 @@
 <script type="text/javascript" src="/admin/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/admin/js/perfect-scrollbar.min.js"></script>
 <script type="text/javascript" src="/admin/js/main.min.js"></script>
+<script type="text/javascript" src="/layer/layer.js"></script>
 
 </body>
 <script type="text/javascript">
+    function deleteArticle(aid) {
+        layer.confirm('确定要删除吗？',function(){
+            $.ajax({
+                type: 'POST',
+                url: '/article/deleteArticle/'+aid,
+                success: function(data){
+                    if (data.code===200){
+                        console.log("data success");
+                        layer.msg('已删除!',{icon: 6,time:1000});
+                        setTimeout(function(){
+                            window.location.reload();
+                        }, 1000);}
+                    else {
+                        alert(data.data);
+                    }
+                },
+                error:function(data) {
+                    layer.msg('删除失败!',{icon: 5,time:1000});
+                    setTimeout(function(){
+                        window.location.reload();
+                    }, 1000);
+                    console.log(data.msg);
+                },
+            });
+        });
+    }
     $(function () {
         $('#search').on('input', (function () {
             var sstxt = $('#search').val();
