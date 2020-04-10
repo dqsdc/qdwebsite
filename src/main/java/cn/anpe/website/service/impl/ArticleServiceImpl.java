@@ -102,6 +102,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public List<Article> getAllArticleList() {
+        return articleMapper.selectAll();
+    }
+
+    @Override
     public Integer countTotalNum() {
         return articleMapper.countTotalNum();
     }

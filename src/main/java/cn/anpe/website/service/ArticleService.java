@@ -40,6 +40,11 @@ public interface ArticleService {
     List<Article> getAllArticleList(Integer page,Integer num);
 
     /**
+     * 获取文章列表
+     */
+    List<Article> getAllArticleList();
+
+    /**
      * 查询一共有多少文章数
      * @return 文章总数
      */

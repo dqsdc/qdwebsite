@@ -18,6 +18,10 @@ public interface RotationService {
      * @return
      */
     List<Rotation> getAllRotationList(Integer page, Integer num);
+    /**
+     *  获取轮播图列表
+     */
+    List<Rotation> getAllRotationList();
 
     /**
      * 查询一共有多少轮播图

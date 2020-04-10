@@ -28,6 +28,11 @@ public class RotationServiceImpl implements RotationService {
     }
 
     @Override
+    public List<Rotation> getAllRotationList() {
+        return rotationMapper.selectAll();
+    }
+
+    @Override
     public Integer countTotalNum() {
         return rotationMapper.countTotalNum();
     }

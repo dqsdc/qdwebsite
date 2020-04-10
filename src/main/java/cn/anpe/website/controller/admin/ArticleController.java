@@ -10,6 +10,8 @@ import cn.anpe.website.service.ArticleService;
 import cn.anpe.website.service.RotationService;
 import cn.anpe.website.util.DateKit;
 import cn.anpe.website.util.UUID;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,24 +58,13 @@ public class ArticleController {
 
 
     @GetMapping("showArticleList")
-    public ModelAndView showArticleList(ModelAndView model) {
-        List<Article> articles = articleService.getAllArticleList(1, 10);
-        Integer total = articleService.countTotalNum();
-        model.addObject("articles", articles);
-        model.addObject("total", Math.ceil(total / 10.0));
-        model.addObject("active", 1);
-        model.setViewName("admin/article_list");
-        return model;
-    }
-
-    @GetMapping(value = "showArticleList/{page}")
-    public ModelAndView getArticleList(ModelAndView model, @PathVariable("page") Integer page) {
-        if (page < 0) page = 1;//错误输入都显示第一页
-        List<Article> articles = articleService.getAllArticleList(page, 10);
-        Integer total = articleService.countTotalNum();
-        model.addObject("articles", articles);
-        model.addObject("total", Math.ceil(total / 10.0));
-        model.addObject("active", page);
+    public ModelAndView showArticleList(ModelAndView model,
+                                        @RequestParam(value = "page", defaultValue = "1") int page,
+                                        @RequestParam(value = "size", defaultValue = "10") int size) {
+        PageHelper.startPage(page, size);
+        List<Article> articles = articleService.getAllArticleList();
+        PageInfo<Article> pageInfo = new PageInfo<>(articles);
+        model.addObject("articles", pageInfo);
         model.setViewName("admin/article_list");
         return model;
     }
@@ -153,29 +144,18 @@ public class ArticleController {
     }
 
     @GetMapping("showRotationList")
-    public ModelAndView showRotationList(ModelAndView model) {
-        List<Rotation> rotations = rotationService.getAllRotationList(1, 10);
-        Integer total = rotationService.countTotalNum();
-        model.addObject("rotations", rotations);
-        model.addObject("total", Math.ceil(total / 10.0));
-        model.addObject("active", 1);
+    public ModelAndView showRotationList(ModelAndView model,
+                                         @RequestParam(value = "page",defaultValue = "1")int page,
+                                         @RequestParam(value = "size",defaultValue = "10")int size) {
+        PageHelper.startPage(page,size);
+        List<Rotation> rotations = rotationService.getAllRotationList();
+        PageInfo<Rotation> pageInfo=new PageInfo<>(rotations);
+        model.addObject("rotations", pageInfo);
         model.addObject("DateKit", new DateKit());
         model.setViewName("admin/rotation_list");
         return model;
     }
 
-    @GetMapping(value = "showRotationList/{page}")
-    public ModelAndView getRotationList(ModelAndView model, @PathVariable("page") Integer page) {
-        if (page < 0) page = 1;//错误输入都显示第一页
-        List<Rotation> rotations = rotationService.getAllRotationList(page, 10);
-        Integer total = rotationService.countTotalNum();
-        model.addObject("rotations", rotations);
-        model.addObject("total", Math.ceil(total / 10.0));
-        model.addObject("active", page);
-        model.addObject("DateKit", new DateKit());
-        model.setViewName("admin/rotation_list");
-        return model;
-    }
 
     @RequestMapping("showRotationAdd")
     public String getRotationAdd() {

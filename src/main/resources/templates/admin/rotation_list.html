@@ -10,6 +10,7 @@
     <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
     <link href="/admin/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="/admin/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/layui/css/layui.css">
     <style>
         table{
             table-layout: fixed;
@@ -72,7 +73,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <th:block th:each="rotation,userStat: ${rotations}">
+                                        <th:block th:each="rotation,userStat: ${rotations.list}">
                                         <tr>
                                             <td>
                                                 <label class="lyear-checkbox checkbox-primary">
@@ -101,14 +102,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <ul class="pagination">
-                                    <li th:class="${active==1?'disabled':''}"><span>«</span></li>
-                                    <th:block th:each="index:${total}">
-                                        <li th:class="${indexStat.count==active?'active':''}"><span th:text="${indexStat.count}">1</span></li>
-                                    </th:block>
-                                    <li th:class="${active==total?'disabled':''}"><a href="#!">»</a></li>
-                                </ul>
-
+                                <div id="demo7"></div>
                             </div>
                         </div>
                     </div>
@@ -126,10 +120,29 @@
 <script type="text/javascript" src="/admin/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/admin/js/perfect-scrollbar.min.js"></script>
 <script type="text/javascript" src="/admin/js/main.min.js"></script>
-<script type="text/javascript" src="/layer/layer.js"></script>
+<script src="/layui/layui.js"></script>
 
 
 </body>
+<script>
+    layui.use(['laypage', 'layer'], function () {
+        var laypage = layui.laypage;
+        //完整功能
+        laypage.render({
+            elem: 'demo7'
+            , count: [[${rotations.total}]]
+            , limit: 10
+            , curr: [[${rotations.pageNum}]]
+            , layout: ['count', 'prev', 'page', 'next', 'skip',]
+            , jump: function (obj,first) {
+                if (!first) {
+                    var curr = obj.curr;
+                    window.location.href = "/article/showRotationList?page=" + curr;
+                }
+            }
+        });
+    });
+</script>
 <script>
     /*删除*/
     function deleteRotation(rid) {
