@@ -172,11 +172,11 @@
         资讯<span>Information</span>
     </div>
     <div class="info-t" aos="fade-up">
-        <a href="http://www.anpe.cn/index.php/news/cid/50.html" class="news" c-data=50>新闻</a>
-        <a href="http://www.anpe.cn/index.php/news/cid/51.html" class="news" c-data=51>展会</a>
-        <a href="http://www.anpe.cn/index.php/news/cid/57.html" class="news" c-data=57>知识</a>
-        <a href="http://www.anpe.cn/index.php/news/cid/56.html" class="news" c-data=56>快讯</a>
-        <a href="http://www.anpe.cn/index.php/news/cid/50.html">更多<i></i></a>
+        <a href="/news/list">全部</a>
+        <th:block th:each="meta,userStat: ${metas}">
+            <a th:href="${'/news/meta/'+meta.metaName}" th:text="${meta.metaName}">美食</a>
+        </th:block>
+        <a href="/news/list">更多<i></i></a>
     </div>
     <div class="wel-new clear">
         <div class="left" aos="fade-right">

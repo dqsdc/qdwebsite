@@ -26,4 +26,10 @@
   <select id="countTotalNum" resultType="Integer">
     SELECT count(*) FROM  `article`
   </select>
+  <select id="selectArticleByMetaName" resultMap="BaseResultMap">
+    select * from article a
+    left join meta_article ma on ma.aid=a.aid
+    LEFT JOIN meta m on m.mid =ma.mid
+    WHERE m.meta_name=#{metaName}
+  </select>
 </mapper>

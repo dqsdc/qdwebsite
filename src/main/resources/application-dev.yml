@@ -37,4 +37,10 @@ server:
   session-timeout: 30
   ##tomcat.max-threads: 0
   tomcat.uri-encoding: UTF-8
+pagehelper:
+    helperDialect: mysql
+    reasonable: true  #开启优化，如果开启优化，在分页页码结果没有数据的时候,会显示有数据的页码数据
+    supportMethodsArguments: true #是否支持接口参数来传递分页参数，默认false
+    pageSizeZero: false #pageSize=0 返回所有
+    params: count=countSql
 

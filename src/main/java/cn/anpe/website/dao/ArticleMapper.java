@@ -19,4 +19,12 @@ public interface ArticleMapper extends Mapper<Article> {
     List<Article> selectArticleListByPageAndNum(@Param("from") Integer from, @Param("num") Integer num);
 
     Integer countTotalNum();
+
+
+    /**
+     * 根据分类名称获取文章列表
+     * @param metaName 分类名称
+     * @return
+     */
+    List<Article> selectArticleByMetaName(@Param("metaName") String metaName);
 }

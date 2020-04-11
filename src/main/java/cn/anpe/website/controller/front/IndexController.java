@@ -1,10 +1,12 @@
 package cn.anpe.website.controller.front;
 
 import cn.anpe.website.domain.Article;
+import cn.anpe.website.domain.Meta;
 import cn.anpe.website.domain.Rotation;
 import cn.anpe.website.service.ArticleService;
 import cn.anpe.website.service.RotationService;
 import cn.anpe.website.util.DateKit;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,7 +45,10 @@ public class IndexController {
     public ModelAndView index(ModelAndView model) {
         List<Rotation> rotations = rotationService.selectRotationShowList();
         List<Article> articles = articleService.getAllArticleList(1, 5);
+        PageHelper.startPage(1,7);//最多显示7条分类
+        List<Meta> metas = articleService.getAllMeta();
         model.addObject("rotations", rotations);
+        model.addObject("metas", metas);
         model.addObject("articles", articles);
         model.addObject("dateKit",new DateKit());
         model.setViewName("front/index");

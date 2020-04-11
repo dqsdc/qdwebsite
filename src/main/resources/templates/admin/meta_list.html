@@ -26,9 +26,9 @@
 <body>
 <div class="lyear-layout-web">
     <div class="lyear-layout-container">
-        <aside th:replace="admin/left::left('文章列表')"></aside>
+        <aside th:replace="admin/left::left('分类标签')"></aside>
         <!--头部信息-->
-        <header th:replace="admin/head::head('文章列表')"></header>
+        <header th:replace="admin/head::head('分类标签')"></header>
         <!--End 头部信息-->
         <!--页面主要内容-->
         <main class="lyear-layout-content">
@@ -50,9 +50,6 @@
                                 </form>
                                 <div class="toolbar-btn-action">
                                     <a class="btn btn-primary m-r-5" href="#!"><i class="mdi mdi-plus"></i> 新增</a>
-                                    <a class="btn btn-success m-r-5" href="#!"><i class="mdi mdi-check"></i> 启用</a>
-                                    <a class="btn btn-warning m-r-5" href="#!"><i class="mdi mdi-block-helper"></i> 禁用</a>
-                                    <a class="btn btn-danger" href="#!"><i class="mdi mdi-window-close"></i> 删除</a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -66,13 +63,10 @@
                                                 </label>
                                             </th>
                                             <th  width="5%">编号</th>
-                                            <th  width="20%">文章标题</th>
-                                            <th  width="6%">作者</th>
-                                            <th  width="30%">副标题</th>
-                                            <th  width="6%">阅读量</th>
-                                            <th  width="6%">排序</th>
-                                            <th  width="6%">状态</th>
-                                            <th  width="10%">操作</th>
+                                            <th  width="20%">名称</th>
+                                            <th  width="30%">描述</th>
+                                            <th  width="20%">排序（从小到大）</th>
+                                            <th >操作</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -83,23 +77,12 @@
                                                     </label>
                                                 </td>
                                                 <td >1</td>
-                                                <td >元旦好!</td>
-                                                <td >张三</td>
-                                                <td>新的一年,xxxxx</td>
-                                                <td >89999</td>
-                                                <td >10</td>
-                                                <td>
-                                                    <span  class="text-info">待审核</span>
-                                                    <span  class="text-success">正常</span>
-                                                    <span  class="text-warning">未通过</span>
-                                                    <span  class="text-danger">禁用</span>
-
-                                                </td>
+                                                <td >美食</td>
+                                                <td >民以食为天</td>
+                                                <td >8</td>
                                                 <td>
                                                     <div style="display: flex;width: 100%;justify-content: space-around">
-                                                        <a class="btn btn-xs btn-default" target="_blank" title="查看" data-toggle="tooltip"><i class="mdi mdi-search-web"></i></a>
-                                                        <a class="btn btn-xs btn-default" target="_blank"  title="显示缩略图" data-toggle="tooltip"><i class="mdi mdi-image-filter-drama"></i></a>
-                                                        <a class="btn btn-xs btn-default"  title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
+                                                      <a class="btn btn-xs btn-default"  title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
                                                         <a class="btn btn-xs btn-default" href="#!"  onclick="deleteArticle(this.dataset.appid)" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
                                                     </div>
                                                 </td>
@@ -135,7 +118,6 @@
         laypage.render({
             elem: 'demo7'
             ,count: 100
-            ,groups: 1
             ,limit: 10
             ,curr: 1
             ,layout: ['count', 'prev', 'page', 'next', 'skip', ]

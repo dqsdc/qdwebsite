@@ -104,6 +104,8 @@
             if (data.code===200){
                 // location.href="/admin/"+data.auth+"/index"
                 location.href=data.url+data.auth;
+            }else{
+              alert(data.data);
             }
         },
         fail: function () {

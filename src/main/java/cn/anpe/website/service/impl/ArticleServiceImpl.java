@@ -34,6 +34,11 @@ public class ArticleServiceImpl implements ArticleService {
         return metaMapper.selectAll();
     }
 
+    @Override
+    public List<Article> getArticlesByMetaName(String metaName) {
+        return articleMapper.selectArticleByMetaName(metaName);
+    }
+
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
     public boolean addArticle(Article article, String meta) {

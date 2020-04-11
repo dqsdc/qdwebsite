@@ -1,0 +1,84 @@
+﻿<html xmlns:th="http://www.thymeleaf.org">
+
+<header th:replace="front/header::head"></header>
+<link rel="stylesheet" href="/layui/css/layui.css">
+<body>
+<div class="ban" aos="fade-zoom-in">
+</div>
+
+<div class="nav">
+    <div class="w1200 clear" aos="fade-left">
+        <div class="left">
+            <img src="/front/images/nav.png" alt="">
+            <a href="javascript:;">资讯</a>
+            <img src="/front/images/nav2.png" class="nav2">
+            <a href="javascript:;">全部分类</a>
+        </div>
+        <ul class="right">
+            <li class="act">
+                <a href="/news/list">全部</a>
+            </li>
+            <th:block th:each="meta,userStat: ${metas}">
+                <li>
+                    <a th:href="${'/news/meta/'+meta.metaName}" th:text="${meta.metaName}">美食</a>
+                </li>
+            </th:block>
+
+        </ul>
+    </div>
+</div>
+<div class="news w1200">
+    <div class="about-ti" aos="fade-down">全部分类</div>
+<!--    <a href="" class="top" aos="fade-up">-->
+<!--        <div class="dl">-->
+<!--            <img src="images/1577086766998nr4gg.jpg" alt="">-->
+<!--        </div>-->
+<!--        <div class="dr">-->
+<!--            <div class="time">2019-12-23</div>-->
+<!--            <div class="ti">中石化框架招标：优倍浪涌保护器荣获第一，安全栅再度入围</div>-->
+<!--            vertical-align: middle;-->
+<!--            <div class="de">为优倍电气与中石化持续广泛而深度的合作奠定了基础。</div>-->
+<!--            <div class="btn"></div>-->
+<!--        </div>-->
+<!--    </a>-->
+    <div class="news-a">
+        <th:block th:each="article,userStat: ${articles.list}">
+            <a th:href="${'/article/detail/'+article.aid}" aos="fade-up">
+                <div class="pic">
+                    <img th:src="${article.thumbImg}" alt="">
+                </div>
+                <div class="font">
+                    <div class="time">2019-12-23</div>
+                    <div class="ti" th:text="${article.title}">中石化框架招标：优倍浪涌保护器荣获第一，安全栅再度入围</div>
+                    <div class="de" th:text="${article.subtitle}">为优倍电气与中石化持续广泛而深度的合作奠定了基础。</div>
+                </div>
+            </a>
+        </th:block>
+    </div>
+    <div id="demo7"></div>
+</div>
+<script src="/layui/layui.js"></script>
+<footer th:replace="front/footer::footer"></footer>
+
+</body>
+<script>
+    layui.use(['laypage', 'layer'], function () {
+        var laypage = layui.laypage;
+        //完整功能
+        laypage.render({
+            elem: 'demo7'
+            , count: [[${articles.total}]]
+            , limit: 9
+            , curr: [[${articles.pageNum}]]
+            , layout: ['count', 'prev', 'page', 'next', 'skip',]
+            , jump: function (obj, first) {
+                if (!first) {
+                    var curr = obj.curr;
+                    window.location.href = "/article/showArticleList?page=" + curr;
+                }
+            }
+        });
+    });
+</script>
+
+</html>

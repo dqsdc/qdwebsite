@@ -14,6 +14,13 @@ public interface ArticleService {
     List<Meta>  getAllMeta();
 
     /**
+     * 根据分类名称获取文章列表
+     * @param metaName 分类名称
+     * @return
+     */
+    List<Article> getArticlesByMetaName(String metaName);
+
+    /**
      * 添加文章内容及其所属分类
      * @param article 文章对象
      * @param meta 详情信息  格式：xxx,xxx
