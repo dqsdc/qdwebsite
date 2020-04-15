@@ -70,16 +70,16 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <tr th:each="meta,userStat:${metas.list}">
                                                 <td>
                                                     <label class="lyear-checkbox checkbox-primary">
                                                         <input type="checkbox" name="ids[]"><span></span>
                                                     </label>
                                                 </td>
-                                                <td >1</td>
-                                                <td >美食</td>
-                                                <td >民以食为天</td>
-                                                <td >8</td>
+                                                <td th:text="${userStat.count}">1</td>
+                                                <td th:text="${meta.metaName}">美食</td>
+                                                <td th:text="${meta.description}">民以食为天</td>
+                                                <td th:text="${meta.sort}">8</td>
                                                 <td>
                                                     <div style="display: flex;width: 100%;justify-content: space-around">
                                                       <a class="btn btn-xs btn-default"  title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
@@ -117,9 +117,9 @@
         //完整功能
         laypage.render({
             elem: 'demo7'
-            ,count: 100
+            ,count: [[${metas.total}]]
             ,limit: 10
-            ,curr: 1
+            ,curr: [[${metas.pageNum}]]
             ,layout: ['count', 'prev', 'page', 'next', 'skip', ]
             ,jump: function(obj){
                 console.log(obj)

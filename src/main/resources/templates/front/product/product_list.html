@@ -1,0 +1,60 @@
+﻿<html xmlns:th="http://www.thymeleaf.org">
+<header th:replace="front/header::head"></header>
+<body>
+<div class="ban" aos="fade-zoom-in">
+    <img src="/front/images/157416680689182f54a.jpg" class="pcban">
+</div>
+
+<div class="nav">
+    <div class="w1200 clear" aos="fade-left">
+        <div class="left">
+            <img src="/front/images/nav.png" alt="">
+            <a href="javascript:;">产品</a>
+            <img src="/front/images/nav2.png" class="nav2">
+            <a href="javascript:;" class="ctype" th:text="${cname}">隔离式安全栅</a>
+        </div>
+    </div>
+</div>
+<div class="product w1200" style="margin-bottom: 2%">
+<!--    <th:block th:if="${categories.size()==0}">-->
+<!--        <span style="font-size: 40px;text-align: center">-->
+<!--            暂无产品！-->
+<!--        </span>-->
+<!--    </th:block>-->
+    <th:block th:if="${categories.size()!=0}">
+        <div class="p-nav" aos="fade-right">
+            <th:block th:each="category,userStat:${categories}">
+                <a th:href="${'/front/product/list?category='+category.getPcid()+'&cname='+category.getShow()}" th:text="${category.show}"
+                   class="act">隔离式安全栅</a>
+            </th:block>
+        </div>
+        <div class="product-c" aos="fade-up">
+            <div class="ti" th:text="${cname}">隔离式安全栅</div>
+            <div class="de"></div>
+            <th:block th:if="${products.size()==0}">
+                <div class="ti" style="font-weight: bold">暂无产品！</div>
+            </th:block>
+            <div class="product-a">
+                <th:block th:if="${products.size()>0}" th:each="product,userStat:${products}">
+                    <div class="pa-b">
+                        <a th:href="${'/product/detail/'+product.aid}">
+                            <div class="pic">
+                                <img th:src="${product.thumbImg}" alt="">
+                            </div>
+                        </a>
+                        <div class="font">
+                            <span class="xg">相关链接：</span>
+                            <div class="xg-a">
+                                <a th:href="${'/product/detail/'+product.aid}">C系列</a>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </th:block>
+</div>
+<footer th:replace="front/footer::footer"></footer>
+</body>
+
+</html>

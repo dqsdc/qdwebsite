@@ -55,6 +55,47 @@ public class ArticleController {
         modelAndView.setViewName("front/detail");
         return modelAndView;
     }
+    //只允许管理员查看状态为0的文章
+    @GetMapping("admin/detail/{aid}")
+    public ModelAndView showAdminDetail(ModelAndView modelAndView, @PathVariable("aid") String aid) {
+        Article article = articleService.getArticleByAid(aid);
+        if (article == null) {
+            modelAndView.addObject("msg", "您访问的文章不存在");
+            modelAndView.setViewName("error/404");
+            return modelAndView;
+        }
+        List<Meta> metas = articleService.getAllMeta();
+        modelAndView.addObject("article", article);
+        modelAndView.addObject("metas", metas);
+        modelAndView.addObject("DateKit", new DateKit());
+        modelAndView.setViewName("front/detail");
+        return modelAndView;
+    }
+
+    @RequestMapping("changeArticleShowStatus")
+    @ResponseBody
+    public ResultVo changeArticleShowStatus(@RequestParam("aid") String aid, int status) {
+        ResultVo resultVo = new ResultVo();
+        if (status > 1 || status < 0) {
+            resultVo.setCode(404);
+            resultVo.setData("无效的状态码");
+            return resultVo;
+        }
+        if (status == 0) {
+            status = 1;
+        } else {
+            status = 0;
+        }
+        if (articleService.changeArticleShowStatus(aid, status)) {
+            resultVo.setCode(200);
+            resultVo.setData("success");
+        } else {
+            resultVo.setCode(400);
+            resultVo.setData("update had failed");
+        }
+        return resultVo;
+
+    }
 
 
     @GetMapping("showArticleList")

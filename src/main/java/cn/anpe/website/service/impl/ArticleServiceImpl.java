@@ -43,6 +43,10 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public boolean addArticle(Article article, String meta) {
         System.out.println(article);
+        article.setHits(0);
+        article.setCommentNum(0);
+        article.setOrderBy(0);
+        article.setStatus(1);
         int a = articleMapper.insert(article);
         String[] metas = meta.split(",");
         for (String m : metas) {
@@ -138,6 +142,11 @@ public class ArticleServiceImpl implements ArticleService {
         int i1 = metaArticleMapper.deleteAllByAid(aid);
         int i = articleMapper.deleteByPrimaryKey(aid);
         return i == 1 && i1 > 0;
+    }
+
+    @Override
+    public boolean changeArticleShowStatus(String aid, int status) {
+        return articleMapper.changeArticleShowStatus(aid, status) == 1;
     }
 
 

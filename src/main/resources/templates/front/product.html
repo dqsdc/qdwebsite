@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:replace="front/header::head"></header>
+<body>
+<div class="ban" aos="fade-zoom-in">
+</div>
+
+<div class="nav">
+    <div class="w1200 clear" aos="fade-left">
+        <div class="left">
+            <img src="/front/images/nav.png" alt="">
+            <a href="javascript:;">资讯</a>
+            <img src="/front/images/nav2.png" class="nav2">
+            <a href="javascript:;" th:text="${product.pcShow}"></a>
+        </div>
+    </div>
+</div>
+<div class="pro-de w1200">
+    <div class="top">
+        <div class="dr" aos="fade-left">
+            <div class="bor">
+                <div class="title clear">
+                    <p class="left" th:text="${product.pcShow}">C系列</p>
+                    <a href="\index.php\select\select\102.html" class="right">快速选型&gt;&gt;</a>
+                </div>
+                <div class="pic">
+                    <img th:src="${product.thumbImg}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="info_box w1200" aos="fade-up">
+    <div class="content_div" th:utext="${product.content}">
+    </div>
+</div>
+<div class="xb-video">
+    <div class="center">
+        <i onclick="cli()">+</i>
+        <iframe width="660" height="400" src="" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+    </div>
+</div>
+<footer th:replace="front/footer::footer"></footer>
+</body>
+
+</html>

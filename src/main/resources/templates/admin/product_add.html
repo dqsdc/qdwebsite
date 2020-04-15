@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>首页 - anpe后台管理系统</title>
+    <link rel="icon" href="favicon.ico" type="image/ico">
+    <meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
+    <meta name="description" content="xxx公司后台管理系统">
+    <meta name="author" content="yinqi">
+    <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/admin/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="/admin/css/style.min.css" rel="stylesheet">
+
+    <link th:href="@{/select2/dist/css/select2-bootstrap.css}" rel="stylesheet"/>
+    <link href="/select2/3.4.8/select2.min.css" rel="stylesheet"/>
+    <style>
+        .myContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 90%;
+            height: 100%;
+            margin: 2%;
+        }
+
+        .myContainer-item {
+            flex: 2;
+            margin-top: 1%;
+            margin-bottom: 1%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="lyear-layout-web">
+    <div class="lyear-layout-container">
+        <aside th:replace="admin/left::left('发布产品')"></aside>
+        <!--头部信息-->
+        <header th:replace="admin/head::head('发布产品')"></header>
+        <!--End 头部信息-->
+        <!--页面主要内容-->
+        <main class="lyear-layout-content">
+            <div class="myContainer">
+                <div class="myContainer-item">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label>产品名:</label>
+                            <label style="width: 95%;margin-left: 10px">
+                                <input class="form-control" type="text" id="title"
+                                       name="title"
+                                       placeholder="请输入产品名称或系列..">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="myContainer-item">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label>分类:</label>
+                            <label style="width: 95%;margin-left: 10px">
+                                <select id="multiple-sel" class="select2 form-control"
+                                        data-placeholder="请选择分类...">
+                                    <th:block th:each="c : ${categories}">
+                                        <option th:value="${c.pcid+'&&'+c.show}" th:text="${c.show}"></option>
+                                    </th:block>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="myContainer-item">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label>上传产品图:</label>
+                            <label style="width: 95%;margin-left: 10px">
+                                <input type="hidden" id="thumb_path" value="">
+                                <input type="file" id="thumb" name="thumb">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="myContainer-item" style="margin-left: 1.5%">
+                    <textarea name="editor" style="min-height: 400px" id="editor"></textarea></div>
+                <div class="myContainer-item" style="margin-left: 1.5%">
+                    <!--<button class="btn btn-primary" type="submit">提交</button>-->
+                    <button class="btn btn-label btn-primary" id="submit"><label><i
+                            class="mdi mdi-checkbox-marked-circle-outline"></i></label> 确认提交
+                    </button>
+                </div>
+            </div>
+        </main>
+        <!--End 页面主要内容-->
+    </div>
+</div>
+
+<script type="text/javascript" src="/admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="/admin/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/admin/js/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="/admin/js/main.min.js"></script>
+
+<!--UEditor组件-->
+<script src="/ueditor/ueditor.config.js"></script>
+<script src="/ueditor/ueditor.all.min.js"></script>
+<script src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+<!--select2组件-->
+<script th:src="@{/select2/3.4.8/select2.min.js}"></script>
+</body>
+<script>
+    UE.getEditor('editor');
+    $("#multiple-sel").select2({
+        width: '100%'
+    });
+</script>
+<script>
+
+    $("#submit").click(function () {
+        var title = $("#title").val();
+        var meta  = $("#multiple-sel").val();
+        if (meta === null || meta === undefined) {
+            alert("您未选择文章分类");
+            return;
+        }
+        var subTitle = $("#subTitle_text").val();
+        var thumb = $("#thumb_path").val();
+        var content = UE.getEditor('editor').getContent();
+        if (title !== "" && title !== undefined) {
+            if (thumb !== null && thumb !== "") {
+                $.ajax({
+                    url: '/product/addProduct',
+                    method: 'post',
+                    data: {
+                        "title": title,
+                        "meta": meta,
+                        "subtitle": subTitle,
+                        "thumbImg": thumb,
+                        "content": content
+                    },
+                    success: function (data) {
+                        if (data.code === 200) {
+                            alert("success");
+                            location.href = data.url;
+                        }
+                    }
+                });
+            } else {
+                alert("请上传文章大图！")
+            }
+
+        } else {
+            alert("文章标题为空！")
+        }
+
+    })
+</script>
+<script>
+    $("#thumb").change(function () {
+        var thumb_file = $('#thumb')[0].files[0];
+        console.log('thumb ' + thumb_file);
+        var formData = new FormData();
+        formData.append("thumb", thumb_file);
+
+        $.ajax({
+            url: '/common/uploadImg',
+            dataType: 'json',
+            type: 'POST',
+            async: true,
+            data: formData,
+            processData: false, // 使数据不做处理
+            contentType: false, // 不要设置Content-Type请求头
+            success: function (data) {
+                console.log(data);
+                console.log(data.data);
+                $("#thumb_path").val(data.data);
+
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,63 @@
+﻿<html xmlns:th="http://www.thymeleaf.org">
+<header th:replace="front/header::head"></header>
+<link rel="stylesheet" href="/layui/css/layui.css">
+<body>
+<div class="ban" aos="fade-zoom-in">
+    <img src="/front/images/1562921369211277rg.jpg" class="pcban">
+    <img src="/front/images/ff819ca882c14e79a1090cca91daa394.gif" class="mban">
+</div>
+
+<div class="nav">
+    <div class="w1200 clear" aos="fade-left">
+        <div class="left">
+            <img src="/front/images/nav.png" alt="">
+            <a href="javascript:;">服务</a>
+            <img src="/front/images/nav2.png" class="nav2">
+            <a href="javascript:;">常见问题</a>
+        </div>
+        <ul class="right">
+            <li class="act">
+                <a href="/application/after">售后服务</a>
+            </li>
+            <li>
+                <a href="/application/ques">常见问题</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="fast w1200">
+    <div class="about-ti" aos="fade-up">常见问题</div>
+    <div class="fast-a">
+        <th:block th:each="article,userStat: ${articles.list}">
+            <a th:href="${'/article/detail/'+article.aid}" aos="fade-up">
+                <div class="ti" th:text="${article.title}">【安全栅&隔离器】开关量输入产品，继电器输出与晶体管输出的区别？</div>
+<!--                 <div class="time">2019-07-19</div> -->
+                <div class="de"></div>
+            </a>
+        </th:block>
+        <div id="demo7"></div>
+    </div>
+</div>
+<footer th:replace="front/footer::footer"></footer>
+</body>
+<script src="/layui/layui.js"></script>
+<script>
+    layui.use(['laypage', 'layer'], function () {
+        var laypage = layui.laypage;
+        //完整功能
+        laypage.render({
+            elem: 'demo7'
+            , count: [[${articles.total}]]
+            , limit: 10
+            , curr: [[${articles.pageNum}]]
+            , layout: ['count', 'prev', 'page', 'next', 'skip',]
+            , jump: function (obj,first) {
+                if (!first) {
+                    var curr = obj.curr;
+                    window.location.href = "/article/showArticleList?page=" + curr;
+                }
+            }
+        });
+    });
+</script>
+</html>

@@ -23,7 +23,17 @@
                         <li th:class="${active=='分类标签'?'active':''}"> <a href="/meta/showMetaList">分类标签</a> </li>
                     </ul>
                 </li>
+                <li class="nav-item nav-item-has-subnav">
+                    <a href="javascript:void(0)"><i class="mdi mdi-palette"></i> 产品管理</a>
+                    <ul class="nav nav-subnav">
 
+                        <li th:class="${active=='发布产品'?'active':''}"> <a href="/product/showAddProduct">发布产品</a> </li>
+
+                        <li th:class="${active=='产品列表'?'active':''}"> <a href="/product/showProductList">产品列表</a> </li>
+
+                        <li th:class="${active=='产品分类'?'active':''}"> <a href="/meta/showMetaList">产品分类</a> </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </div>

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.anpe.website.dao.ArticleMapper">
-  <resultMap id="BaseResultMap" type="cn.anpe.website.domain.Article">
+<mapper namespace="cn.anpe.website.dao.ProductShowMapper">
+  <resultMap id="BaseResultMap" type="cn.anpe.website.domain.ProductShow">
     <id column="aid" jdbcType="VARCHAR" property="aid" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
     <result column="modified_time" jdbcType="BIGINT" property="modifiedTime" />
     <result column="author_id" jdbcType="VARCHAR" property="authorId" />
+    <result column="author_name" jdbcType="VARCHAR" property="authorName" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="thumb_img" jdbcType="VARCHAR" property="thumbImg" />
     <result column="hits" jdbcType="INTEGER" property="hits" />
@@ -14,25 +15,17 @@
     <result column="error" jdbcType="VARCHAR" property="error" />
     <result column="order_by" jdbcType="INTEGER" property="orderBy" />
     <result column="subtitle" jdbcType="VARCHAR" property="subtitle" />
+    <result column="pcid" jdbcType="VARCHAR" property="pcid" />
+    <result column="pc_show" jdbcType="VARCHAR" property="pcShow" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.anpe.website.domain.Article">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.anpe.website.domain.ProductShow">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
-
-  <select id="selectArticleListByPageAndNum" resultMap="BaseResultMap">
-    SELECT * FROM `article` ORDER BY create_time DESC limit #{from},#{num}
-  </select>
-
-  <select id="countTotalNum" resultType="Integer">
-    SELECT count(*) FROM  `article`
-  </select>
-  <select id="selectArticleByMetaName" resultMap="BaseResultMap">
-    select * from article a
-    left join meta_article ma on ma.aid=a.aid
-    LEFT JOIN meta m on m.mid =ma.mid
-    WHERE m.meta_name=#{metaName}
-  </select>
-  <update id="changeArticleShowStatus">
-    update article set status=#{status} where aid=#{aid}
+  <update id="changeProductShowStatus">
+    update product_show set status=#{status} where aid=#{aid}
   </update>
+
+  <select id="getProductListByCategory" resultMap="BaseResultMap">
+    select * from product_show where pcid=#{pcid}
+  </select>
 </mapper>

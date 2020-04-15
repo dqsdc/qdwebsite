@@ -75,4 +75,12 @@ public interface ArticleService {
      * @return
      */
     boolean deleteArticle(String aid);
+
+    /**
+     * 快捷改变文章显示状态  1为显示，0为隐藏
+     * @param aid
+     * @param status
+     * @return
+     */
+    boolean changeArticleShowStatus(String aid,int status);
 }

@@ -27,9 +27,9 @@
 <body>
 <div class="lyear-layout-web">
     <div class="lyear-layout-container">
-        <aside th:replace="admin/left::left('文章列表')"></aside>
+        <aside th:replace="admin/left::left('产品列表')"></aside>
         <!--头部信息-->
-        <header th:replace="admin/head::head('文章列表')"></header>
+        <header th:replace="admin/head::head('产品列表')"></header>
         <!--End 头部信息-->
         <!--页面主要内容-->
         <main class="lyear-layout-content">
@@ -64,30 +64,28 @@
                                                     <input type="checkbox" id="check-all"><span></span>
                                                 </label>
                                             </th>
-                                            <th width="5%">编号</th>
-                                            <th width="20%">文章标题</th>
-                                            <th width="4%">作者</th>
-                                            <th width="30%">副标题</th>
-                                            <th width="6%">阅读量</th>
-                                            <th width="6%">状态</th>
+                                            <th width="7%">编号</th>
+                                            <th width="30%">产品名</th>
+                                            <th width="10%">作者</th>
+                                            <th width="10%">阅读量</th>
+                                            <th width="10%">状态</th>
                                             <th>操作</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <th:block th:each="article,userStat: ${articles.list}">
+                                        <th:block th:each="product,userStat: ${products.list}">
                                             <tr>
                                                 <td>
                                                     <label class="lyear-checkbox checkbox-primary">
                                                         <input type="checkbox" name="ids[]"
-                                                               th:value="${article.aid}"><span></span>
+                                                               th:value="${product.aid}"><span></span>
                                                     </label>
                                                 </td>
                                                 <td th:text="${userStat.count}">1</td>
-                                                <td th:text="${article.title}">元旦好!</td>
-                                                <td th:text="${article.authorId}">张三</td>
-                                                <td th:text="${article.subtitle}">新的一年,xxxxx</td>
-                                                <td th:text="${article.hits}">89999</td>
-                                                <td th:switch="${article.status}">
+                                                <td th:text="${product.title}">元旦好!</td>
+                                                <td th:text="${product.authorName}">新的一年,xxxxx</td>
+                                                <td th:text="${product.hits}">89999</td>
+                                                <td th:switch="${product.status}">
                                                     <span th:case="0" class="text-info">待审核</span>
                                                     <span th:case="1" class="text-success">正常</span>
                                                     <span th:case="2" class="text-warning">未通过</span>
@@ -97,26 +95,26 @@
                                                 <td>
                                                     <div style="display: flex;width: 100%;justify-content: space-around">
                                                         <a class="btn btn-xs btn-default"
-                                                           th:href="${'/article/admin/detail/'+article.aid}" target="_blank"
+                                                           th:href="${'/product/detail/'+product.aid}" target="_blank"
                                                            title="查看" data-toggle="tooltip"><i
                                                                 class="mdi mdi-search-web"></i></a>
-                                                        <a th:if="${article.thumbImg!=null}"
+                                                        <a th:if="${product.thumbImg!=null}"
                                                            class="btn btn-xs btn-default" target="_blank"
-                                                           th:href="${article.thumbImg}" title="显示缩略图"
+                                                           th:href="${product.thumbImg}" title="显示缩略图"
                                                            data-toggle="tooltip"><i
                                                                 class="mdi mdi-image-filter-drama"></i></a>
                                                         <a class="btn btn-xs btn-default"
                                                            data-toggle="tooltip"
-                                                           th:data-ishow="${article.status}"
-                                                           th:data-appid="${article.aid}"
+                                                           th:data-ishow="${product.status}"
+                                                           th:data-appid="${product.aid}"
                                                            onclick="status_change(this,this.dataset.appid,this.dataset.ishow)" >
-                                                            <i th:class="'mdi '+${article.status==1?'mdi-eye-off-outline':'mdi-eye-outline'}"></i></a>
+                                                            <i th:class="'mdi '+${product.status==1?'mdi-eye-off-outline':'mdi-eye-outline'}"></i></a>
                                                         <a class="btn btn-xs btn-default"
-                                                           th:href="${'/article/showUpdateArticle/'+article.aid}"
+                                                           th:href="${'/product/showUpdateProduct/'+product.aid}"
                                                            title="编辑" data-toggle="tooltip"><i
                                                                 class="mdi mdi-pencil"></i></a>
                                                         <a class="btn btn-xs btn-default" href="#!"
-                                                           th:data-appid="${article.aid}"
+                                                           th:data-appid="${product.aid}"
                                                            onclick="deleteArticle(this.dataset.appid)" title="删除"
                                                            data-toggle="tooltip"><i
                                                                 class="mdi mdi-window-close"></i></a>
@@ -154,9 +152,9 @@
         //完整功能
         laypage.render({
             elem: 'demo7'
-            , count: [[${articles.total}]]
+            , count: [[${products.total}]]
             , limit: 10
-            , curr: [[${articles.pageNum}]]
+            , curr: [[${products.pageNum}]]
             , layout: ['count', 'prev', 'page', 'next', 'skip',]
             , jump: function (obj,first) {
                 if (!first) {
@@ -173,7 +171,7 @@
         layer.confirm('确定要更改状态？',function(){
             $.ajax({
                 type: 'POST',
-                url: '/article/changeArticleShowStatus',
+                url: '/product/changeProductShowStatus',
                 data: {
                     'aid':aId,
                     'status':show
@@ -202,7 +200,7 @@
         layer.confirm('确定要删除吗？', function () {
             $.ajax({
                 type: 'POST',
-                url: '/article/deleteArticle/' + aid,
+                url: '/product/deleteProduct/' + aid,
                 success: function (data) {
                     if (data.code === 200) {
                         console.log("data success");

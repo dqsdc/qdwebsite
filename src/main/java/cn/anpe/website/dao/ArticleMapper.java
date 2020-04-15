@@ -27,4 +27,7 @@ public interface ArticleMapper extends Mapper<Article> {
      * @return
      */
     List<Article> selectArticleByMetaName(@Param("metaName") String metaName);
+
+    //快速更改文章状态
+    int changeArticleShowStatus(String aid,int status);
 }
