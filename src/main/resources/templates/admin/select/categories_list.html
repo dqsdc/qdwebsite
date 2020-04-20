@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>文章列表 - anpe后台管理系统</title>
+    <link rel="icon" href="favicon.ico" type="image/ico">
+    <meta name="description" content="xxx公司后台管理系统">
+    <meta name="author" content="yinqi">
+    <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/admin/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="/admin/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <style>
+        table {
+            table-layout: fixed;
+        }
+        table tbody tr td {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+<div class="lyear-layout-web">
+    <div class="lyear-layout-container">
+        <aside th:replace="admin/left::left('产品分类')"></aside>
+        <!--头部信息-->
+        <header th:replace="admin/head::head('产品分类')"></header>
+        <!--End 头部信息-->
+        <!--页面主要内容-->
+        <main class="lyear-layout-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-toolbar clearfix">
+                                <form class="pull-right search-bar" method="get" action="#!" role="form">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <input type="hidden" name="search_field" id="search-field" value="title">
+                                            <button class="btn btn-default dropdown-toggle" id="search-btn"
+                                                    type="button" aria-haspopup="true" aria-expanded="false">
+                                                搜索:
+                                            </button>
+                                        </div>
+                                        <input type="text" class="form-control" id="search" name="keyword"
+                                               placeholder="请输入名称">
+                                    </div>
+                                </form>
+                                <div class="toolbar-btn-action">
+                                    <a class="btn btn-primary m-r-5" id="add"><i class="mdi mdi-plus"></i> 新增</a>
+                                    <a id="btn-refresh" class="btn btn-info m-r-5"  href="javascript:location.reload();"><i class="mdi mdi-autorenew"></i>刷新 </a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th width="4%">
+                                                <label class="lyear-checkbox checkbox-primary">
+                                                    <input type="checkbox" id="check-all"><span></span>
+                                                </label>
+                                            </th>
+                                            <th width="10%">编号</th>
+                                            <th width="35%">分类名称</th>
+                                            <th width="35%">描述</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <th:block th:each="category,userStat: ${categories.list}">
+                                            <tr>
+                                                <td>
+                                                    <label class="lyear-checkbox checkbox-primary">
+                                                        <input type="checkbox" name="ids[]"
+                                                               th:value="${category.pcid}"><span></span>
+                                                    </label>
+                                                </td>
+                                                <td th:text="${userStat.count}">1</td>
+                                                <td th:text="${category.show}">元旦好!</td>
+                                                <td th:text="${category.description}">张三</td>
+                                                <td>
+                                                    <div style="display: flex;width: 100%;justify-content: space-around">
+                                                        <a class="btn btn-xs btn-default" href="#!"
+                                                           th:data-pcid="${category.pcid}"
+                                                          onclick="updateCategory(this.dataset.pcid)"
+                                                           title="编辑" data-toggle="tooltip"><i
+                                                                class="mdi mdi-pencil"></i></a>
+                                                        <a class="btn btn-xs btn-default" href="#!"
+                                                           th:data-appid="${category.pcid}"
+                                                           onclick="deleteArticle(this.dataset.appid)" title="删除"
+                                                           data-toggle="tooltip"><i
+                                                                class="mdi mdi-window-close"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </th:block>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="demo7"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+        <!--End 页面主要内容-->
+    </div>
+</div>
+
+<script type="text/javascript" src="/admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="/admin/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/admin/js/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="/admin/js/main.min.js"></script>
+<script src="/layui/layui.js"></script>
+
+</body>
+<script>
+    layui.use(['laypage', 'layer'], function () {
+        var laypage = layui.laypage;
+        //完整功能
+        laypage.render({
+            elem: 'demo7'
+            , count: [[${categories.total}]]
+            , limit: 10
+            , curr: [[${categories.pageNum}]]
+            , layout: ['count', 'prev', 'page', 'next', 'skip',]
+            , jump: function (obj,first) {
+                if (!first) {
+                    var curr = obj.curr;
+                    window.location.href = "/article/showArticleList?page=" + curr;
+                }
+            }
+        });
+    });
+</script>
+<script>
+    $("#add").click(function () {
+        layer.open({
+            type: 2,
+            title: '新建分类',
+            shadeClose: true,
+            shade: false,
+            area: ['1000px', '550px'],
+            content: '/admin/select/showAddCategory',
+            end: function () {//finally
+                location.reload();
+            }
+        });
+    });
+
+    function updateCategory(pcid) {
+        layer.open({
+            type: 2,
+            title: '分类修改',
+            shadeClose: true,
+            resize:false,
+            shade: false,
+            area: ['1000px', '550px'],
+            content: '/admin/select/showUpdateCategory/' + pcid,
+            end: function () {//finally
+                location.reload();
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    function deleteArticle(pcid) {
+        layer.confirm('确定要删除吗？', function () {
+            $.ajax({
+                type: 'POST',
+                url: '/admin/select/deleteCategory/' + pcid,
+                success: function (data) {
+                    if (data.code === 200) {
+                        console.log("data success");
+                        layer.msg('已删除!', {icon: 6, time: 1000});
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1000);
+                    } else {
+                        alert(data.data);
+                    }
+                },
+                error: function (data) {
+                    layer.msg('删除失败!', {icon: 5, time: 1000});
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                    console.log(data.msg);
+                },
+            });
+        });
+    }
+
+    $(function () {
+        $('#search').on('input', (function () {
+            var sstxt = $('#search').val();
+            console.log(sstxt);
+            if (sstxt !== '') {
+                $("table tbody tr").hide().filter(":contains('" + sstxt + "')").show();
+            } else {
+                $("table tbody tr").show();
+            }
+        }))
+    });
+</script>
+
+
+</html>

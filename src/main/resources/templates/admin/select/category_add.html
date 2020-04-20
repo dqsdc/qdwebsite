@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>更新属性</title>
+    <link rel="icon" href="favicon.ico" type="image/ico">
+    <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/admin/css/materialdesignicons.min.css" rel="stylesheet">
+    <!--标签插件-->
+    <link rel="stylesheet" href="/admin/js/jquery-tags-input/jquery.tagsinput.min.css">
+    <link href="/admin/css/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="lyear-layout-web" style="margin-top: 3%">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group col-md-12">
+                    <label>属性名</label>
+                    <input type="text" class="form-control" id="attribute" name="attribute"
+
+                           placeholder="请输入属性名"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>描述</label>
+                    <input type="text" class="form-control" id="description" name="description"
+                           placeholder="请输入属性描述"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <button id="submit" class="btn btn-primary ajax-post">提交
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="/admin/js/bootstrap.min.js"></script>
+</body>
+<script>
+    $("#submit").click(function () {
+        const description = $("#description").val();
+        const attribute = $("#attribute").val();
+        $.ajax({
+            url: '/admin/select/addCategory',
+            method: 'post',
+            data: {
+                "show": attribute,
+                "description": description
+            },
+            success: function (data) {
+                console.log("success");
+                if (data.code === 200) {
+                    console.log("ok");
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                }
+            },
+            error: function (response) {
+                console.log("error " + response);
+            }
+        });
+    });
+
+</script>
+</html>

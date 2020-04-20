@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.anpe.website.dao.AttributeMapper">
+  <resultMap id="BaseResultMap" type="cn.anpe.website.domain.Attribute">
+    <id column="aid" jdbcType="VARCHAR" property="aid" />
+    <result column="sid" jdbcType="VARCHAR" property="sid" />
+    <result column="attribute_name" jdbcType="VARCHAR" property="attributeName" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+</mapper>

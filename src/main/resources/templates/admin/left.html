@@ -1,37 +1,48 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <!--左侧导航-->
-<aside  th:fragment="left(active)" class="lyear-layout-sidebar">
+<aside th:fragment="left(active)" class="lyear-layout-sidebar">
     <!-- logo -->
     <div id="logo" class="sidebar-header">
-        <a href="/admin/index"><img src="/admin/images/logo-sidebar.png" title="LightYear" alt="LightYear" /></a>
+        <a href="/admin/index"><img src="/admin/images/logo-sidebar.png" title="LightYear" alt="LightYear"/></a>
     </div>
     <div class="lyear-layout-sidebar-scroll">
 
         <nav class="sidebar-main">
             <ul class="nav nav-drawer">
-                <li class="nav-item" th:class="${active=='首页'?'active':''}"> <a href="/admin/index"><i class="mdi mdi-home"></i> 后台首页</a> </li>
+                <li class="nav-item" th:class="${active=='首页'?'active':''}"><a href="/admin/index"><i
+                        class="mdi mdi-home"></i> 后台首页</a></li>
 
                 <li class="nav-item nav-item-has-subnav">
-                    <a href="javascript:void(0)"><i class="mdi mdi-palette"></i> 文章管理</a>
+                    <a href="javascript:void(0)"><i class="mdi mdi-file-word-box"></i> 文章管理</a>
                     <ul class="nav nav-subnav">
-                        <li th:class="${active=='轮播图'?'active':''}"> <a href="/article/showRotationList">轮播图</a> </li>
+                        <li th:class="${active=='轮播图'?'active':''}"><a href="/article/showRotationList">轮播图</a></li>
 
-                        <li th:class="${active=='发布文章'?'active':''}"> <a href="/article/showAddArticle">发布文章</a> </li>
+                        <li th:class="${active=='发布文章'?'active':''}"><a href="/article/showAddArticle">发布文章</a></li>
 
-                        <li th:class="${active=='文章列表'?'active':''}"> <a href="/article/showArticleList">文章列表</a> </li>
+                        <li th:class="${active=='文章列表'?'active':''}"><a href="/article/showArticleList">文章列表</a></li>
 
-                        <li th:class="${active=='分类标签'?'active':''}"> <a href="/meta/showMetaList">分类标签</a> </li>
+                        <li th:class="${active=='分类标签'?'active':''}"><a href="/meta/showMetaList">分类标签</a></li>
                     </ul>
                 </li>
                 <li class="nav-item nav-item-has-subnav">
                     <a href="javascript:void(0)"><i class="mdi mdi-palette"></i> 产品管理</a>
                     <ul class="nav nav-subnav">
 
-                        <li th:class="${active=='发布产品'?'active':''}"> <a href="/product/showAddProduct">发布产品</a> </li>
+                        <li th:class="${active=='发布产品'?'active':''}"><a href="/product/showAddProduct">发布产品</a></li>
 
-                        <li th:class="${active=='产品列表'?'active':''}"> <a href="/product/showProductList">产品列表</a> </li>
+                        <li th:class="${active=='产品列表'?'active':''}"><a href="/product/showProductList">产品列表</a></li>
 
-                        <li th:class="${active=='产品分类'?'active':''}"> <a href="/meta/showMetaList">产品分类</a> </li>
+
+                    </ul>
+                </li>
+                <li class="nav-item nav-item-has-subnav">
+                    <a href="javascript:void(0)"><i class="mdi mdi-server"></i> 选型管理</a>
+                    <ul class="nav nav-subnav">
+                        <li th:class="${active=='产品分类'?'active':''}"><a href="/admin/select/showCategoryList">产品分类</a></li>
+
+                        <li th:class="${active=='二级分类管理'?'active':''}"><a href="/admin/select/showSubSeriesList">子分类管理</a></li>
+
+                        <li th:class="${active=='产品管理'?'active':''}"><a href="/meta/showMetaList">产品管理</a></li>
                     </ul>
                 </li>
             </ul>

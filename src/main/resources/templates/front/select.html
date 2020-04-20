@@ -1,0 +1,123 @@
+﻿<html xmlns:th="http://www.thymeleaf.org">
+<header th:replace="front/header::head"></header>
+<link rel="stylesheet" href="/layui/css/layui.css">
+<body>
+<div class="ban" aos="fade-zoom-in">
+    <img src="/front/images/15619484831671hayp8.jpg" class="pcban">
+    <img src="/front/images/1561948487001qof0e.jpg" class="mban">
+</div>
+
+<div class="nav">
+    <div class="w1200 clear" aos="fade-left">
+        <div class="left">
+            <img src="/front/images/nav.png" alt="">
+            <a href="javascript:;">选型</a>
+            <img src="/front/images/nav2.png" class="nav2">
+            <a href="javascript:;">隔离式安全栅</a>
+        </div>
+    </div>
+</div>
+<div class="select w1200 clear">
+    <div class="s-nav wrapper">
+        <div class="snb content_1">
+            <th:block th:each="select,index:${selectVo}">
+                <div class="sb">
+                    <div class="s-ti" th:text="${select.getProductCategory().getShow()}">隔离式安全栅</div>
+                    <div class="link ctype">
+                        <th:block th:each="subseries,index:${select.getSubSeries()}">
+                            <a th:href="${'/select/index?sid='+subseries.sid}" th:class="${subseries.sid==sid?'act':''}"
+                               th:text="${subseries.getAttributeName()}">温度量输入</a>
+                        </th:block>
+                    </div>
+                </div>
+            </th:block>
+
+        </div>
+
+    </div>
+    <div class="select-c">
+        <!-- 二级分类 -->
+        <div class="top">
+            <a th:href="'/select/index?sid='+${sid}" th:class="${xilie==null?'act':''}">全部</a>
+            <th:block th:each="ser,index:${serList}">
+                <a th:href="'/select/index?xilie='+${ser}+'&sid='+${sid}"
+                   th:class="${xilie==ser}?'act':''"
+                   th:text="${ser}">C系列</a>
+            </th:block>
+        </div>
+        <!-- / -->
+
+        <div class="bot">
+            <!--            <div class="pic">-->
+            <!--                <img src="images/15744002324469ot78z.jpg" alt="">-->
+            <!--            </div>-->
+            <!-- 三级分类 -->
+            <form class="form">
+                <th:block th:each="attribute,index:${attributeVo}">
+                    <div class="form-box">
+                        <div class="ti" th:text="${attribute.getAttribute().getAttributeName()}">输入</div>
+                        <th:block th:each="value,index:${attribute.getValues()}">
+                            <label class="form-input">
+                                <input type="radio" th:name="${attribute.getAttribute().getAid()}" th:text="${value}">
+                            </label>
+                        </th:block>
+                    </div>
+                </th:block>
+            </form>
+            <!-- / -->
+            <div class="sel-pro">
+                <th:block th:if="${products.total==0}">
+                    <div class="ti">暂无对应产品！</div>
+                </th:block>
+
+                <th:block th:if="${products.total>0}">
+                    <div class="ti">以下 <span th:text="${products.total}">18</span>个产品符合条件</div>
+                </th:block>
+
+                <th:block th:each="product,index:${products.list}">
+                    <div class="sp-b">
+                        <div class="pic"><img th:src="${product.thumbImg}" alt=""></div>
+                        <div class="font">
+                            <a href="" th:text="${product.productName}" class="num" target="_blank">NPEXA-C01H </a>
+                            <div class="de">
+                                温度型输入安全栅，将危险区的热电偶、热电阻信号，经隔离转换为电流或电压信号输出到安全区，外置冷端补偿端子。该产品需要独立供电，输入、输出和电源三端隔离，具有在线故障自诊断功能，可以通过PC端或手持编程器对温度量程、信号类型等进行组态设置。
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+                <div id="demo7" style="margin-top: 1%"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="front/footer::footer"></footer>
+</body>
+<script src="/layui/layui.js"></script>
+<script>
+    layui.use(['laypage', 'layer'], function () {
+        var laypage = layui.laypage;
+        //完整功能
+        laypage.render({
+            elem: 'demo7'
+            , count: [[${products.total}]]
+            , limit: 10
+            , curr: [[${products.pageNum}]]
+            , layout: ['count', 'prev', 'page', 'next', 'skip',]
+            , jump: function (obj, first) {
+                if (!first) {
+                    var curr = obj.curr;
+                    window.location.href = "";
+                }
+            }
+        });
+    });
+</script>
+<script>
+    $('.sb .s-ti').click(function () {
+        $(this).parent().find('.link').slideToggle();
+        $(this).parent().siblings().find('.link').slideUp();
+    });
+    $(".sb .link .act").parent().slideDown()
+
+</script>
+</html>

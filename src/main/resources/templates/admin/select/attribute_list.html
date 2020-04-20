@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>属性列表 - anpe后台管理系统</title>
+    <link rel="icon" href="favicon.ico" type="image/ico">
+    <meta name="description" content="xxx公司后台管理系统">
+    <meta name="author" content="yinqi">
+    <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/admin/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="/admin/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <style>
+        table {
+            table-layout: fixed;
+        }
+
+        table tbody tr td {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+<div class="lyear-layout-web">
+    <!--页面主要内容-->
+    <main class="lyear-layout-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-toolbar clearfix">
+                            <div class="toolbar-btn-action">
+                                <a class="btn btn-primary m-r-5" id="add"><i class="mdi mdi-plus"></i> 新增</a>
+                                <div class="card" id="addAttribute" hidden="hidden">
+                                    <div class="card-body">
+                                        <form class="form-inline">
+                                            <div class="form-group">
+                                                <input type="text" id="sid" th:value="${sid}" hidden>
+                                                <input class="form-control" type="text" id="attributeName"
+                                                       placeholder="请输入属性名..">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" id="description"
+                                                       placeholder="请输入属性描述..">
+                                            </div>
+                                            <div class="form-group">
+                                                <button class="btn btn-default" id="addSubmit">添加</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th width="4%">
+                                            <label class="lyear-checkbox checkbox-primary">
+                                                <input type="checkbox" id="check-all"><span></span>
+                                            </label>
+                                        </th>
+                                        <th width="10%">编号</th>
+                                        <th width="35%">属性名称</th>
+                                        <th width="35%">描述</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <th:block th:each="attribute,userStat: ${attributes.list}">
+                                        <tr>
+                                            <td>
+                                                <label class="lyear-checkbox checkbox-primary">
+                                                    <input type="checkbox" name="ids[]"
+                                                           th:value="${attribute.aid}"><span></span>
+                                                </label>
+                                            </td>
+                                            <td th:text="${userStat.count}">1</td>
+                                            <td th:text="${attribute.attributeName}">元旦好!</td>
+                                            <td th:text="${attribute.description}">张三</td>
+                                            <td>
+                                                <div style="display: flex;width: 100%;justify-content: space-around">
+                                                    <a class="btn btn-xs btn-default"
+                                                       th:data-appid="${attribute.aid}"
+                                                       onclick="updateAttribute(this.dataset.appid)"
+                                                       title="编辑" data-toggle="tooltip"><i
+                                                            class="mdi mdi-pencil"></i></a>
+                                                    <a class="btn btn-xs btn-default" href="#!"
+                                                       th:data-appid="${attribute.aid}"
+                                                       onclick="deleteArticle(this.dataset.appid)" title="删除"
+                                                       data-toggle="tooltip"><i
+                                                            class="mdi mdi-window-close"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="demo7"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!--End 页面主要内容-->
+</div>
+</div>
+
+<script type="text/javascript" src="/admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="/admin/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/admin/js/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="/admin/js/main.min.js"></script>
+<script src="/layui/layui.js"></script>
+
+</body>
+<script>
+    layui.use(['laypage', 'layer'], function () {
+        var laypage = layui.laypage;
+        //完整功能
+        laypage.render({
+            elem: 'demo7'
+            , count: [[${attributes.total}]]
+            , limit: 10
+            , curr: [[${attributes.pageNum}]]
+            , layout: ['count', 'prev', 'page', 'next', 'skip',]
+            , jump: function (obj, first) {
+                if (!first) {
+                    var curr = obj.curr;
+                    window.location.href = "/article/showArticleList?page=" + curr;
+                }
+            }
+        });
+    });
+</script>
+<script>
+    $("#add").click(function () {
+        $("#addAttribute").toggle();
+    });
+    $("#addSubmit").click(function () {
+        $.ajax({
+            type: 'POST',
+            url: '/admin/select/addAttribute',
+            data: {
+                "attributeName": $("#attributeName").val(),
+                "description": $("#description").val(),
+                "sid": $("#sid").val()
+            },
+            async: true,
+            success: function (data) {
+                if (data.code === 200) {
+                    console.log("data success");
+                    layer.msg('已添加!', {icon: 6, time: 1000});
+                    setTimeout(function () {
+                        location.href = "/admin/select/showAttributeList/" + $("#sid").val();
+                    }, 1000);
+                }
+            }
+        });
+    })
+</script>
+<script>
+    function updateAttribute(aid) {
+        layer.open({
+            type: 2,
+            title: '修改属性',
+            shadeClose: true,
+            shade: false,
+            area: ['500px', '300px'],
+            content: '/admin/select/showUpdateAttribute/' + aid,
+            end: function () {//finally
+                location.href = "/admin/select/showAttributeList/" + $("#sid").val();
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    function deleteArticle(aid) {
+        layer.confirm('确定要删除吗？', function () {
+            $.ajax({
+                type: 'POST',
+                url: '/admin/select/deleteAttribute/' + aid,
+                success: function (data) {
+                    if (data.code === 200) {
+                        console.log("data success");
+                        layer.msg('已删除!', {icon: 6, time: 1000});
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1000);
+                    } else {
+                        layer.msg(data.data, {icon: 5, time: 1000});
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1000);
+                    }
+                },
+                error: function (data) {
+                    layer.msg('删除失败!', {icon: 5, time: 1000});
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                    console.log(data.msg);
+                },
+            });
+        });
+    }
+
+    $(function () {
+        $('#search').on('input', (function () {
+            var sstxt = $('#search').val();
+            console.log(sstxt);
+            if (sstxt !== '') {
+                $("table tbody tr").hide().filter(":contains('" + sstxt + "')").show();
+            } else {
+                $("table tbody tr").show();
+            }
+        }))
+    });
+</script>
+
+
+</html>
