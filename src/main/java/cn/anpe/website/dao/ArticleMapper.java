@@ -3,6 +3,7 @@ package cn.anpe.website.dao;
 
 import cn.anpe.website.domain.Article;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -30,4 +31,7 @@ public interface ArticleMapper extends Mapper<Article> {
 
     //快速更改文章状态
     int changeArticleShowStatus(String aid,int status);
+
+    @Select("select * from article")
+    List<Article> selectTest();
 }

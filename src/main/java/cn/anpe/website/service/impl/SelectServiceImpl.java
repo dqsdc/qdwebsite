@@ -5,11 +5,12 @@ import cn.anpe.website.domain.*;
 import cn.anpe.website.domain.vo.AttributeVo;
 import cn.anpe.website.domain.vo.SelectVo;
 import cn.anpe.website.service.SelectService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Auther: dqsdc
@@ -165,5 +166,21 @@ public class SelectServiceImpl implements SelectService {
     @Override
     public List<String> getProductSerList(String sid) {
         return productMapper.getProductSerList(sid);
+    }
+
+    @Override
+    public PageInfo<Product> getProductListByAttribute(String[] params, int limit, int page) {
+        ProductAttributeKV[] param = new ProductAttributeKV[params.length];
+        for (int i = 0; i < params.length; i++) {
+            String key = params[i].split("qdzdhqdzdh")[0];
+            String val = params[i].split("qdzdhqdzdh")[1];
+            param[i] = new ProductAttributeKV(key, val);
+        }
+
+        List<String> ids = productAttributeMapper.getProductIdByAttribute(param, param.length);
+        if (ids == null || ids.size() == 0) return new PageInfo<>();
+        PageHelper.startPage(limit, page);
+        List<Product> products = productMapper.selectAllByIds(ids);
+        return new PageInfo<>(products);
     }
 }

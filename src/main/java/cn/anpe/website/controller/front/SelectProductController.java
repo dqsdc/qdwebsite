@@ -9,10 +9,13 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -70,5 +73,21 @@ public class SelectProductController {
             model.addObject("xilie", xilie);
         }
         return model;
+    }
+
+    @RequestMapping("/ajaxUpdateProductList")
+    public String ajaxUpdateProductList(
+            @RequestParam("params") String[] params,
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size, Model modelAndView) {
+
+        PageInfo<Product> list = selectService.getProductListByAttribute(params, page, size);
+        modelAndView.addAttribute("products", list);
+        return "front/select::productList";
+    }
+
+    @RequestMapping("selDetail")
+    public String selDetail() {
+        return "front/selDetail";
     }
 }

@@ -1,39 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.anpe.website.dao.ProductMapper">
-  <resultMap id="BaseResultMap" type="cn.anpe.website.domain.Product">
-    <id column="pid" jdbcType="VARCHAR" property="pid" />
-    <result column="sid" jdbcType="VARCHAR" property="sid" />
-    <result column="series" jdbcType="VARCHAR" property="series" />
-    <result column="product_name" jdbcType="VARCHAR" property="productName" />
-    <result column="thumb_img" jdbcType="VARCHAR" property="thumbImg" />
-    <result column="power" jdbcType="VARCHAR" property="power" />
-    <result column="input" jdbcType="VARCHAR" property="input" />
-    <result column="output" jdbcType="VARCHAR" property="output" />
-    <result column="load_allow" jdbcType="VARCHAR" property="loadAllow" />
-    <result column="tem_drift" jdbcType="VARCHAR" property="temDrift" />
-    <result column="response" jdbcType="VARCHAR" property="response" />
-    <result column="consumption" jdbcType="VARCHAR" property="consumption" />
-    <result column="work_tem" jdbcType="VARCHAR" property="workTem" />
-    <result column="storage_tem" jdbcType="VARCHAR" property="storageTem" />
-    <result column="app_place" jdbcType="VARCHAR" property="appPlace" />
-    <result column="output_state" jdbcType="VARCHAR" property="outputState" />
-    <result column="elec" jdbcType="VARCHAR" property="elec" />
-    <result column="dielectric" jdbcType="VARCHAR" property="dielectric" />
-    <result column="insulation" jdbcType="VARCHAR" property="insulation" />
-    <result column="connection_style" jdbcType="VARCHAR" property="connectionStyle" />
-    <result column="specification" jdbcType="VARCHAR" property="specification" />
-    <result column="installation" jdbcType="VARCHAR" property="installation" />
-    <result column="certification" jdbcType="VARCHAR" property="certification" />
-    <result column="explosion" jdbcType="VARCHAR" property="explosion" />
-    <result column="uo" jdbcType="VARCHAR" property="uo" />
-    <result column="io" jdbcType="VARCHAR" property="io" />
-    <result column="po" jdbcType="VARCHAR" property="po" />
-    <result column="co" jdbcType="VARCHAR" property="co" />
-    <result column="lo" jdbcType="VARCHAR" property="lo" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
-  </resultMap>
-  <select id="getProductSerList" resultType="String">
+    <resultMap id="BaseResultMap" type="cn.anpe.website.domain.Product">
+        <id column="pid" jdbcType="VARCHAR" property="pid"/>
+        <result column="sid" jdbcType="VARCHAR" property="sid"/>
+        <result column="series" jdbcType="VARCHAR" property="series"/>
+        <result column="product_name" jdbcType="VARCHAR" property="productName"/>
+        <result column="thumb_img" jdbcType="VARCHAR" property="thumbImg"/>
+        <result column="power" jdbcType="VARCHAR" property="power"/>
+        <result column="input" jdbcType="VARCHAR" property="input"/>
+        <result column="output" jdbcType="VARCHAR" property="output"/>
+        <result column="load_allow" jdbcType="VARCHAR" property="loadAllow"/>
+        <result column="tem_drift" jdbcType="VARCHAR" property="temDrift"/>
+        <result column="response" jdbcType="VARCHAR" property="response"/>
+        <result column="consumption" jdbcType="VARCHAR" property="consumption"/>
+        <result column="work_tem" jdbcType="VARCHAR" property="workTem"/>
+        <result column="storage_tem" jdbcType="VARCHAR" property="storageTem"/>
+        <result column="app_place" jdbcType="VARCHAR" property="appPlace"/>
+        <result column="output_state" jdbcType="VARCHAR" property="outputState"/>
+        <result column="elec" jdbcType="VARCHAR" property="elec"/>
+        <result column="dielectric" jdbcType="VARCHAR" property="dielectric"/>
+        <result column="insulation" jdbcType="VARCHAR" property="insulation"/>
+        <result column="connection_style" jdbcType="VARCHAR" property="connectionStyle"/>
+        <result column="specification" jdbcType="VARCHAR" property="specification"/>
+        <result column="installation" jdbcType="VARCHAR" property="installation"/>
+        <result column="certification" jdbcType="VARCHAR" property="certification"/>
+        <result column="explosion" jdbcType="VARCHAR" property="explosion"/>
+        <result column="uo" jdbcType="VARCHAR" property="uo"/>
+        <result column="io" jdbcType="VARCHAR" property="io"/>
+        <result column="po" jdbcType="VARCHAR" property="po"/>
+        <result column="co" jdbcType="VARCHAR" property="co"/>
+        <result column="lo" jdbcType="VARCHAR" property="lo"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+    </resultMap>
+    <select id="getProductSerList" resultType="String">
     select distinct series from product where sid=#{sid}
-</select>
+    </select>
+    <select id="selectAllByIds" parameterType="java.util.List" resultMap="BaseResultMap">
+        select * from product where pid in
+        <foreach item="id" index="index" collection="ids" open="(" separator="," close=")">
+             #{id,jdbcType=VARCHAR}
+        </foreach>
+    </select>
 </mapper>

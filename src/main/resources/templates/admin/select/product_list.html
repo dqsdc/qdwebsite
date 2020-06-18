@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>文章列表 - anpe后台管理系统</title>
+    <link rel="icon" href="favicon.ico" type="image/ico">
+    <meta name="description" content="xxx公司后台管理系统">
+    <meta name="author" content="yinqi">
+    <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/admin/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="/admin/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/littlel-select/css/selectfilter.css"/>
+    <style>
+        table {
+            table-layout: fixed;
+        }
+
+        table tbody tr td {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+<div class="lyear-layout-web">
+    <div class="lyear-layout-container">
+        <aside th:replace="admin/left::left('产品管理')"></aside>
+        <!--头部信息-->
+        <header th:replace="admin/head::head('产品管理')"></header>
+        <!--End 头部信息-->
+        <!--页面主要内容-->
+        <main class="lyear-layout-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-toolbar clearfix">
+                                <form class="pull-right search-bar" method="get" action="#!" role="form">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <input type="hidden" name="search_field" id="search-field" value="title">
+                                            <button class="btn btn-default dropdown-toggle" id="search-btn"
+                                                    type="button" aria-haspopup="true" aria-expanded="false">
+                                                搜索:
+                                            </button>
+                                        </div>
+                                        <input type="text" class="form-control" id="search" name="keyword"
+                                               placeholder="请输入名称">
+                                    </div>
+                                </form>
+                                <div class="toolbar-btn-action">
+                                    <div class="btn-group">
+                                        <div class="filter-box" id="categoryFilter">
+                                            <div class="filter-text">
+                                                <input class="filter-title" type="text" readonly
+                                                       placeholder="pleace select"/>
+                                                <i class="icon icon-filter-arrow"></i>
+                                            </div>
+                                            <select name="filter">
+                                                <th:block th:each="category,index:${categories}">
+                                                    <option th:value="${category.pcid+'&&'+category.show}"
+                                                            th:selected="${pcid==category.pcid}"
+                                                            th:text="${category.getShow()}">最新的
+                                                    </option>
+                                                </th:block>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group">
+                                        <div class="filter-box" id="subFilter">
+                                            <div class="filter-text">
+                                                <input class="filter-title" type="text" readonly
+                                                       placeholder="pleace select"/>
+                                                <i class="icon icon-filter-arrow"></i>
+                                            </div>
+                                            <select name="filter">
+                                                <th:block th:if="${subSeries==null||subSeries.size()==0}">
+                                                    <option selected disabled>无二级分类</option>
+                                                </th:block>
+                                                <th:block th:if="${subSeries.size()>0}"
+                                                          th:each="sub,index:${subSeries}">
+                                                    <option th:value="${sub.sid+'&&'+pcid}"
+                                                            th:selected="${sid==sub.sid}"
+                                                            th:text="${sub.attributeName}">最新的
+                                                    </option>
+                                                </th:block>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <a class="btn btn-primary m-r-5" id="add" th:data-pcid="${sid}"
+                                       onclick="addSubSeries(this.dataset.pcid)"><i class="mdi mdi-plus"></i> 新增</a>
+                                </div>
+                            </div>
+                            <th:block th:if="${products==null||products.list.size()==0}">
+                                <div style="margin: 5%;font-size: 30px;font-weight: bold">
+                                    暂无产品！
+                                </div>
+                            </th:block>
+                            <th:block th:if="${products!=null&&products.list.size()>0}">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th width="4%">
+                                                    <label class="lyear-checkbox checkbox-primary">
+                                                        <input type="checkbox" id="check-all"><span></span>
+                                                    </label>
+                                                </th>
+                                                <th width="10%">编号</th>
+                                                <th width="35%">产品名称</th>
+                                                <th width="35%">描述</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <th:block th:each="product,userStat: ${products.list}">
+                                                <tr>
+                                                    <td>
+                                                        <label class="lyear-checkbox checkbox-primary">
+                                                            <input type="checkbox" name="ids[]"
+                                                                   th:value="${product.pid}"><span></span>
+                                                        </label>
+                                                    </td>
+                                                    <td th:text="${userStat.count}">1</td>
+                                                    <td>
+                                                        <a style="cursor:pointer;" th:data-sid="${product.pid}"
+                                                           onclick="showAttribute(this.dataset.sid)"
+                                                           th:text="${product.productName}">元旦好!</a>
+                                                    </td>
+                                                    <td th:text="${product.productName}">张三</td>
+                                                    <td>
+                                                        <div style="display: flex;width: 100%;justify-content: space-around">
+                                                            <a class="btn btn-xs btn-default"
+                                                               href="#!"
+                                                               th:data-sid="${product.pid}"
+                                                               onclick="updateSubSeries(this.dataset.sid)"
+                                                               title="编辑" data-toggle="tooltip"><i
+                                                                    class="mdi mdi-pencil"></i></a>
+                                                            <a class="btn btn-xs btn-default" href="#!"
+                                                               th:data-appid="${product.pid}"
+                                                               onclick="deleteSubSeries(this.dataset.appid)" title="删除"
+                                                               data-toggle="tooltip"><i
+                                                                    class="mdi mdi-window-close"></i></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <div id="demo7"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+        <!--End 页面主要内容-->
+    </div>
+</div>
+
+<script type="text/javascript" src="/admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="/admin/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/admin/js/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="/admin/js/main.min.js"></script>
+<script type="text/javascript" src="/littlel-select/js/selectfilter.js"></script>
+<script src="/layui/layui.js"></script>
+
+</body>
+<script>
+    layui.use(['laypage', 'layer'], function () {
+        var laypage = layui.laypage;
+        //完整功能
+        laypage.render({
+            elem: 'demo7'
+            , count: [[${products==null?'10':products.total}]]
+            , limit: 10
+            , curr: [[${products==null?'0':products.pageNum}]]
+            , layout: ['count', 'prev', 'page', 'next', 'skip',]
+            , jump: function (obj, first) {
+                if (!first) {
+                    var curr = obj.curr;
+                    window.location.href = "/article/showArticleList?page=" + curr;
+                }
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    //这里是初始化
+    $('#categoryFilter').selectFilter({
+        callBack: function (val) {
+            //返回选择的值
+            var pcid = val.split('&&')[0];
+            window.location.href = "/admin/select/showProductList?pcid=" + pcid;
+        }
+    });
+    $('#subFilter').selectFilter({
+        callBack: function (val) {
+            //返回选择的值
+            var sid = val.split('&&')[0];
+            var pcid = val.split('&&')[1];
+            window.location.href = "/admin/select/showProductList?pcid=" + pcid + "&sid=" + sid;
+        }
+    });
+</script>
+
+<script>
+    function showAttribute(sid) {
+        layer.open({
+            type: 2,
+            title: '属性列表',
+            shadeClose: true,
+            resize: false,
+            shade: false,
+            area: ['1000px', '550px'],
+            content: '/admin/select/showAttributeList/' + sid,
+            end: function () {//finally
+                location.reload();
+            }
+        });
+    }
+
+    function addSubSeries(sid) {
+        layer.open({
+            type: 2,
+            title: '新键产品',
+            shadeClose: true,
+            shade: false,
+            area: ['1000px', '550px'],
+            content: '/admin/select/showAddProduct?sid=' + sid,
+            end: function () {//finally
+                location.reload();
+            }
+        });
+    }
+
+    function updateSubSeries(sid) {
+        layer.open({
+            type: 2,
+            title: '子分类修改',
+            shadeClose: true,
+            resize: false,
+            shade: false,
+            area: ['1000px', '550px'],
+            content: '/admin/select/showUpdateSubSeries/' + sid,
+            end: function () {//finally
+                location.reload();
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    function deleteSubSeries(pid) {
+        layer.confirm('确定要删除吗？', function () {
+            $.ajax({
+                type: 'POST',
+                url: '/admin/select/deleteProduct/' + pid,
+                success: function (data) {
+                    if (data === "success") {
+                        console.log("data success");
+                        layer.msg('已删除!', {icon: 6, time: 1000});
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1000);
+                    } else {
+                        alert("删除失败");
+                    }
+                },
+                error: function (data) {
+                    layer.msg('删除失败!', {icon: 5, time: 1000});
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                    console.log(data.msg);
+                },
+            });
+        });
+    }
+
+    $(function () {
+        $('#search').on('input', (function () {
+            var sstxt = $('#search').val();
+            if (sstxt !== '') {
+                $("table tbody tr").hide().filter(":contains('" + sstxt + "')").show();
+            } else {
+                $("table tbody tr").show();
+            }
+        }))
+    });
+</script>
+
+
+</html>

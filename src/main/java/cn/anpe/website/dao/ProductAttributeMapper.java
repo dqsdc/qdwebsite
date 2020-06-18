@@ -1,8 +1,9 @@
 package cn.anpe.website.dao;
 
 
-import cn.anpe.website.domain.Attribute;
 import cn.anpe.website.domain.ProductAttribute;
+import cn.anpe.website.domain.ProductAttributeKV;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -17,4 +18,6 @@ public interface ProductAttributeMapper extends Mapper<ProductAttribute> {
      * @return
      */
     List<String> getAttributeValueList(String aid);
+
+    List<String> getProductIdByAttribute(@Param("param") ProductAttributeKV[] param, @Param("num") int num);
 }

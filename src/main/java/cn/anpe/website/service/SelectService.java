@@ -6,6 +6,7 @@ import cn.anpe.website.domain.ProductCategory;
 import cn.anpe.website.domain.SubSeries;
 import cn.anpe.website.domain.vo.AttributeVo;
 import cn.anpe.website.domain.vo.SelectVo;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -108,5 +109,8 @@ public interface SelectService {
      * @param sid 子序列id
      */
     List<String> getProductSerList(String sid);
+
+
+    PageInfo<Product> getProductListByAttribute(String[] params, int limit, int page);
 
 }

@@ -1,10 +1,13 @@
 package cn.anpe.website.service.impl;
 
 import cn.anpe.website.dao.ProductCategoryMapper;
+import cn.anpe.website.dao.ProductMapper;
 import cn.anpe.website.dao.ProductShowMapper;
+import cn.anpe.website.domain.Product;
 import cn.anpe.website.domain.ProductCategory;
 import cn.anpe.website.domain.ProductShow;
 import cn.anpe.website.service.ProductService;
+import cn.anpe.website.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,11 +21,15 @@ import java.util.List;
  */
 @Service
 public class ProductServiceImpl implements ProductService {
+
     @Autowired
     ProductCategoryMapper productCategoryMapper;
 
     @Autowired
     ProductShowMapper productShowMapper;
+
+    @Autowired
+    ProductMapper productMapper;
 
     @Override
     public List<ProductCategory> getAllCategory() {
@@ -41,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Transactional
     @Override
-    public boolean deleteProduct(String aid) {
+    public boolean deleteProductShow(String aid) {
         int i = productShowMapper.deleteByPrimaryKey(aid);
         return i == 1;
     }
@@ -64,5 +71,16 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductShow> getProductListByCategory(String pcid) {
         return productShowMapper.getProductListByCategory(pcid);
+    }
+
+    @Override
+    public void addProduct(Product product) {
+        product.setPid(UUID.UU32());
+        productMapper.insert(product);
+    }
+
+    @Override
+    public boolean deleteProduct(String aid) {
+        return productMapper.deleteByPrimaryKey(aid) == 1;
     }
 }

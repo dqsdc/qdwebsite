@@ -31,9 +31,7 @@
                     </div>
                 </div>
             </th:block>
-
         </div>
-
     </div>
     <div class="select-c">
         <!-- 二级分类 -->
@@ -58,35 +56,38 @@
                         <div class="ti" th:text="${attribute.getAttribute().getAttributeName()}">输入</div>
                         <th:block th:each="value,index:${attribute.getValues()}">
                             <label class="form-input">
-                                <input type="radio" th:name="${attribute.getAttribute().getAid()}" th:text="${value}">
+                                <input type="radio" th:name="${attribute.getAttribute().getAid()}" th:text="${value}"
+                                       th:value="${value}">
                             </label>
                         </th:block>
                     </div>
                 </th:block>
             </form>
             <!-- / -->
-            <div class="sel-pro">
-                <th:block th:if="${products.total==0}">
-                    <div class="ti">暂无对应产品！</div>
-                </th:block>
+            <div id="productList">
+                <div class="sel-pro" th:fragment="productList">
+                    <th:block th:if="${products==null||products.total==0}">
+                        <div class="ti">暂无对应产品！</div>
+                    </th:block>
 
-                <th:block th:if="${products.total>0}">
-                    <div class="ti">以下 <span th:text="${products.total}">18</span>个产品符合条件</div>
-                </th:block>
+                    <th:block th:if="${products!=null&&products.total>0}">
+                        <div class="ti">以下 <span th:text="${products.total}">18</span>个产品符合条件</div>
+                    </th:block>
 
-                <th:block th:each="product,index:${products.list}">
-                    <div class="sp-b">
-                        <div class="pic"><img th:src="${product.thumbImg}" alt=""></div>
-                        <div class="font">
-                            <a href="" th:text="${product.productName}" class="num" target="_blank">NPEXA-C01H </a>
-                            <div class="de">
-                                温度型输入安全栅，将危险区的热电偶、热电阻信号，经隔离转换为电流或电压信号输出到安全区，外置冷端补偿端子。该产品需要独立供电，输入、输出和电源三端隔离，具有在线故障自诊断功能，可以通过PC端或手持编程器对温度量程、信号类型等进行组态设置。
+                    <th:block th:each="product,index:${products.list}">
+                        <div class="sp-b">
+                            <div class="pic"><img th:src="${product.thumbImg}" alt=""></div>
+                            <div class="font">
+                                <a href="" th:text="${product.productName}" class="num" target="_blank">NPEXA-C01H </a>
+                                <div class="de">
+                                    温度型输入安全栅，将危险区的热电偶、热电阻信号，经隔离转换为电流或电压信号输出到安全区，外置冷端补偿端子。该产品需要独立供电，输入、输出和电源三端隔离，具有在线故障自诊断功能，可以通过PC端或手持编程器对温度量程、信号类型等进行组态设置。
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </th:block>
-                <div id="demo7" style="margin-top: 1%"></div>
+                    </th:block>
+                </div>
             </div>
+            <div id="demo7" style="margin-top: 1%"></div>
         </div>
     </div>
 </div>
@@ -119,5 +120,40 @@
     });
     $(".sb .link .act").parent().slideDown()
 
+</script>
+<script>
+    let isDefaultAdd = 0;
+    $("input[type=radio]").click(function () {
+        var $radio = $(this);
+        if ($radio.data('waschecked') === true) {
+            $radio.prop('checked', false);
+            $radio.data('waschecked', false);
+            isDefaultAdd = 0;
+        } else {
+            $radio.prop('checked', true);
+            $radio.data('waschecked', true);
+            isDefaultAdd = 1;
+        }
+        var radios = $('input[type=radio]:checked');
+        var boxIds = [];
+        $.each(radios, function (index, value) {
+            boxIds.push(value.name + "qdzdhqdzdh" + value.value);
+        });
+        $.ajax({
+            url: '/select/ajaxUpdateProductList',
+            type: 'POST',
+            async: true,
+            data: {
+                "params": boxIds
+            },
+            traditional: true,//这里设置为true
+            success: function (data) {
+                $("#productList").html(data);
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    });
 </script>
 </html>

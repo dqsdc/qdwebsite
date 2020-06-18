@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>新增产品</title>
+    <link rel="icon" href="favicon.ico" type="image/ico">
+    <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/admin/css/materialdesignicons.min.css" rel="stylesheet">
+    <!--标签插件-->
+    <link rel="stylesheet" href="/admin/js/jquery-tags-input/jquery.tagsinput.min.css">
+    <link href="/admin/css/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="lyear-layout-web" style="margin-top: 3%">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group col-md-12">
+                    <input type="hidden" id="pcid" th:value="${pcid}">
+                    <input type="hidden" id="sid" th:value="${sid}">
+                    <label>产品名</label>
+                    <input type="text" class="form-control" id="productName" name="productName"
+                           placeholder="请输入产品名"/>
+                </div>
+                <div class="myContainer-item">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label>上传产品图:</label>
+                            <label style="width: 95%;margin-left: 10px">
+                                <input type="hidden" id="thumb_path">
+                                <input type="file" id="thumb" name="thumb">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="myContainer-item">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label>上传描述图:</label>
+                            <label style="width: 95%;margin-left: 10px">
+                                <input type="hidden" id="description">
+                                <input type="file" id="productImg" name="productImg">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>所属系列</label>
+                    <input type="text" class="form-control" id="series" name="series"
+                           placeholder="请输入属性描述"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>供电电源</label>
+                    <input type="text" class="form-control" id="power" name="power"
+                           placeholder="请输入属性描述"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>输入信号</label>
+                    <input type="text" class="form-control" id="input" name="input"
+                           placeholder="请输入输入信号"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>输出信号</label>
+                    <input type="text" class="form-control" id="output" name="output"
+                           placeholder="请输入输出信号"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>允许负载</label>
+                    <input type="text" class="form-control" id="loadAllow" name="loadAllow"
+                           placeholder="请输入允许负载"/>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label>温度漂移</label>
+                    <input type="text" class="form-control" id="temDrift" name="temDrift"
+                           placeholder="请输入温度漂移"/>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label>响应时间</label>
+                    <input type="text" class="form-control" id="response" name="response"
+                           placeholder="请输入响应时间"/>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label>工作消耗</label>
+                    <input type="text" class="form-control" id="consumption" name="consumption"
+                           placeholder="请输入工作消耗"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>工作温度</label>
+                    <input type="text" class="form-control" id="workTem" name="workTem"
+                           placeholder="请输入工作温度"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>储存温度</label>
+                    <input type="text" class="form-control" id="storageTem" name="storageTem"
+                           placeholder="请输入储存温度"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>应用场所</label>
+                    <input type="text" class="form-control" id="appPlace" name="appPlace"
+                           placeholder="请输入应用场所"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>输出状态</label>
+                    <input type="text" class="form-control" id="outputState" name="outputState"
+                           placeholder="请输入输出状态"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>电磁兼容</label>
+                    <input type="text" class="form-control" id="elec" name="elec"
+                           placeholder="请输入电磁兼容"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>介电强度</label>
+                    <input type="text" class="form-control" id="dielectric" name="dielectric"
+                           placeholder="请输入介电强度"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>绝缘电阻</label>
+                    <input type="text" class="form-control" id="insulation" name="insulation"
+                           placeholder="请输入绝缘电阻"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>连接方式</label>
+                    <input type="text" class="form-control" id="connectionStyle" name="connectionStyle"
+                           placeholder="请输入连接方式"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>规格尺寸</label>
+                    <input type="text" class="form-control" id="specification" name="specification"
+                           placeholder="请输入规格尺寸"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>安装方式</label>
+                    <input type="text" class="form-control" id="installation" name="installation"
+                           placeholder="请输入安装方式"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>产品认证</label>
+                    <input type="text" class="form-control" id="certification" name="certification"
+                           placeholder="请输入产品认证"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>防爆等级</label>
+                    <input type="text" class="form-control" id="explosion" name="explosion"
+                           placeholder="请输入防爆等级"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>uo</label>
+                    <input type="text" class="form-control" id="uo" name="uo" value="8.7 V (1、2、3端子间)"
+                           placeholder="请输入uo"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>io</label>
+                    <input type="text" class="form-control" id="io" name="io" value="33 mA (1、2、3端子间)"
+                           placeholder="请输入io"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>po</label>
+                    <input type="text" class="form-control" id="po" name="po" value="72 mW (1、2、3端子间)"
+                           placeholder="请输入po"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>co</label>
+                    <input type="text" class="form-control" id="co" name="co" value="5 μF (1、2、3端子间)"
+                           placeholder="请输入po"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>lo</label>
+                    <input type="text" class="form-control" id="lo" name="lo" value="28 mH (1、2、3端子间)"
+                           placeholder="请输入lo"/>
+                </div>
+                <div class="form-group col-md-12">
+                    <button id="submit" class="btn btn-primary ajax-post">提交
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="/admin/js/bootstrap.min.js"></script>
+</body>
+<script>
+    $("#submit").click(function () {
+        const pcid = $("#pcid").val();
+        const sid = $("#sid").val();
+        const productName = $("#productName").val();
+        const series = $("#series").val();
+        const power = $("#power").val();
+        const input = $("#input").val();
+        const output = $("#output").val();
+        const loadAllow = $("#loadAllow").val();
+        const temDrift = $("#temDrift").val();
+        const response = $("#response").val();
+        const consumption = $("#consumption").val();
+        const workTem = $("#workTem").val();
+        const storageTem = $("#storageTem").val();
+        const appPlace = $("#appPlace").val();
+        const outputState = $("#outputState").val();
+        const elec = $("#elec").val();
+        const dielectric = $("#dielectric").val();
+        const insulation = $("#insulation").val();
+        const connectionStyle = $("#connectionStyle").val();
+        const specification = $("#specification").val();
+        const installation = $("#installation").val();
+        const certification = $("#certification").val();
+        const explosion = $("#explosion").val();
+        const uo = $("#uo").val();
+        const io = $("#io").val();
+        const po = $("#po").val();
+        const co = $("#co").val();
+        const lo = $("#lo").val();
+        const thumbImg = $("#thumb_path").val();
+        const description = $("#description").val();
+
+        $.ajax({
+            url: '/admin/select/addProduct',
+            method: 'post',
+            data: {
+                "pcid": pcid,
+                "sid": sid,
+                "productName": productName,
+                "series": series,
+                "power": power,
+                "input": input,
+                "output": output,
+                "loadAllow": loadAllow,
+                "temDrift": temDrift,
+                "response": response,
+                "consumption": consumption,
+                "workTem": workTem,
+                "storageTem": storageTem,
+                "appPlace": appPlace,
+                "outputState": outputState,
+                "elec": elec,
+                "dielectric": dielectric,
+                "insulation": insulation,
+                "connectionStyle": connectionStyle,
+                "specification": specification,
+                "installation": installation,
+                "certification": certification,
+                "explosion": explosion,
+                "uo": uo,
+                "io": io,
+                "po": po,
+                "co": co,
+                "lo": lo,
+                "thumbImg": thumbImg,
+                "description": description,
+
+            },
+            success: function (data) {
+                if (data === "success") {
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                }
+            },
+            error: function (response) {
+                console.log("error " + response);
+            }
+        });
+    });
+
+    $("#thumb").change(function () {
+        var thumb_file = $('#thumb')[0].files[0];
+        console.log('thumb ' + thumb_file);
+        var formData = new FormData();
+        formData.append("thumb", thumb_file);
+
+        $.ajax({
+            url: '/common/uploadImg',
+            dataType: 'json',
+            type: 'POST',
+            async: true,
+            data: formData,
+            processData: false, // 使数据不做处理
+            contentType: false, // 不要设置Content-Type请求头
+            success: function (data) {
+                $("#thumb_path").val(data.data);
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    });
+
+    $("#productImg").change(function () {
+        var thumb_file = $('#productImg')[0].files[0];
+        console.log('thumb ' + thumb_file);
+        var formData = new FormData();
+        formData.append("thumb", thumb_file);
+
+        $.ajax({
+            url: '/common/uploadImg',
+            dataType: 'json',
+            type: 'POST',
+            async: true,
+            data: formData,
+            processData: false, // 使数据不做处理
+            contentType: false, // 不要设置Content-Type请求头
+            success: function (data) {
+                $("#description").val(data.data);
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    });
+
+</script>
+
+</html>

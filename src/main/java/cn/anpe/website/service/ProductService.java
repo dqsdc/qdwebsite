@@ -1,6 +1,7 @@
 package cn.anpe.website.service;
 
 import cn.anpe.website.domain.Article;
+import cn.anpe.website.domain.Product;
 import cn.anpe.website.domain.ProductCategory;
 import cn.anpe.website.domain.ProductShow;
 
@@ -23,8 +24,9 @@ public interface ProductService {
      * @param aid 文章id
      * @return
      */
-    boolean deleteProduct(String aid);
+    boolean deleteProductShow(String aid);
 
+    boolean deleteProduct(String aid);
     /**
      * 更新产品
      * @param productShow
@@ -44,4 +46,6 @@ public interface ProductService {
     boolean changeProductShowStatus(String aid,int status);
 
     List<ProductShow> getProductListByCategory(String category);
+
+    void addProduct(Product product);
 }

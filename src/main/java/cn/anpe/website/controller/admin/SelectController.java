@@ -1,14 +1,12 @@
 package cn.anpe.website.controller.admin;
 
 import cn.anpe.website.domain.*;
-import cn.anpe.website.domain.vo.AttributeVo;
 import cn.anpe.website.domain.vo.ResultVo;
+import cn.anpe.website.service.ProductService;
 import cn.anpe.website.service.SelectService;
-import cn.anpe.website.util.DateKit;
 import cn.anpe.website.util.UUID;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +22,12 @@ import java.util.List;
 @Controller
 @RequestMapping("admin/select")
 public class SelectController {
+
     @Autowired
     SelectService selectService;
 
+    @Autowired
+    ProductService productService;
 
     /**
      * 删除分类id
@@ -231,6 +232,68 @@ public class SelectController {
         selectService.addAttribute(attribute);
         resultVo.setCode(ResultVo.SUCCESS);
         return resultVo;
+    }
+
+    @RequestMapping("showProductList")
+    public ModelAndView showProductList(ModelAndView model, String pcid, String sid,
+                                        @RequestParam(value = "page", defaultValue = "1") int page,
+                                        @RequestParam(value = "size", defaultValue = "10") int size) {
+        List<ProductCategory> categoryList = selectService.getAllCategoryList();
+        model.addObject("categories", categoryList);//获得一级分类
+
+        if (categoryList.size() == 0) {
+            model.addObject("pcid", null);
+            model.addObject("subSeries", null);
+            model.addObject("sid", null);
+            model.addObject("products", null);
+            model.setViewName("admin/select/product_list");
+            return model;
+        }
+        if (pcid == null || pcid.equals("")) {
+            pcid = categoryList.get(0).getPcid();
+        }
+        List<SubSeries> seriesList = selectService.getAllSubSeriesList(pcid);
+        model.addObject("pcid", pcid);
+        model.addObject("subSeries", seriesList);
+        System.out.println(seriesList.size());
+        if (seriesList.size() == 0) {
+            model.addObject("sid", sid);
+            model.addObject("products", null);
+            model.setViewName("admin/select/product_list");
+            return model;
+        }
+        if (sid == null || sid.equals("")) {
+            sid = seriesList.get(0).getSid();
+        }
+        PageHelper.startPage(page, size);
+        List<Product> productList = selectService.getAllProductList(sid);
+        PageInfo<Product> info = new PageInfo<>(productList);
+        model.addObject("products", info);
+        model.addObject("sid", sid);
+        model.setViewName("admin/select/product_list");
+        return model;
+    }
+
+    @RequestMapping("showAddProduct")
+    public ModelAndView showAddProduct(ModelAndView model, String pcid, String sid) {
+        model.addObject("pcid", pcid);
+        model.addObject("sid", sid);
+        model.setViewName("admin/select/product_add");
+        return model;
+    }
+
+    @RequestMapping("addProduct")
+    @ResponseBody
+    public String addProduct(Product product) {
+        productService.addProduct(product);
+        return "success";
+    }
+
+    @RequestMapping("deleteProduct/{pid}")
+    @ResponseBody
+    public String deleteProduct(@PathVariable("pid") String pid) {
+        productService.deleteProduct(pid);
+        return "success";
     }
 
 }

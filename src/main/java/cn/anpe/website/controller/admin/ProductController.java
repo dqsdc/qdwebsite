@@ -109,7 +109,7 @@ public class ProductController {
     @ResponseBody
     public ResultVo deleteProduct(@PathVariable("aid") String aid) {
         ResultVo vo = new ResultVo();
-        boolean flag = productService.deleteProduct(aid);
+        boolean flag = productService.deleteProductShow(aid);
         if (flag) {
             vo.setCode(ResultVo.SUCCESS);
             vo.setData("删除成功");
