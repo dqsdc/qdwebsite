@@ -30,7 +30,7 @@
                 <div class="form-group col-md-12">
                     <label>链接地址</label>
                     <input type="text" class="form-control" id="url" name="url"
-                           value="" placeholder="请输入链接地址,请以Http://或Https://开头"/>
+                           placeholder="请输入链接地址,请以Http://或Https://开头"/>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="sort">排序</label>
@@ -69,6 +69,7 @@
             return;
         }
         const url = $("#url").val();
+        console.log(url);
         if (url != null || url !== '') {
             let match = url.match("(http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&:/~\\+#]*[\\w\\-\\@?^=%&/~\\+#])?");
             if (!match) {
